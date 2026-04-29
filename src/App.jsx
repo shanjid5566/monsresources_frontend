@@ -1,16 +1,20 @@
 import React from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
+import router from './router/router';
+import store from './store/store';
+import { TOAST_CONFIG } from './config';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <header className="bg-blue-600 text-white p-4">
-        <h1 className="text-2xl font-bold">Welcome to Vite + React</h1>
-      </header>
-      <main className="p-8">
-        <h2 className="text-3xl font-semibold mb-4">Fresh Project</h2>
-        <p className="text-gray-600">Start building your application here.</p>
-      </main>
-    </div>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <Toaster
+        position={TOAST_CONFIG.POSITION}
+        toastOptions={{ duration: TOAST_CONFIG.DURATION }}
+      />
+    </Provider>
   );
 }
 

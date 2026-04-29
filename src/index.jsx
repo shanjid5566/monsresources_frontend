@@ -1,15 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import router from './router/router';
-import store from './store/store';
 import './index.css';
+import App from './App';
+import {
+  reportWebVitals,
+  detectLongTasks,
+  checkPerformanceBudget,
+} from './utils/web-vitals';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <App />
   </React.StrictMode>,
 );
+
+if (process.env.NODE_ENV !== 'production') {
+  reportWebVitals();
+  detectLongTasks();
+  checkPerformanceBudget();
+}
