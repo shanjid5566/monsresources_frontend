@@ -4,7 +4,11 @@ import { Provider } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import router from './router/router';
 import store from './store/store';
-import { TOAST_CONFIG } from './config';
+
+const TOAST_CONFIG = {
+  POSITION: 'top-center',
+  DURATION: 3000,
+};
 
 function App() {
   return (

@@ -7,9 +7,8 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Layout from '../components/Layout';
+import PublicLayout from '../components/layout/public/PublicLayout';
 import AdminLayout from '../components/layout/admin/Layout';
-import { ROUTES } from '../config';
 import { selectIsAuthenticated } from '../store/slices/authSlice';
 
 const Home = lazy(() => import('../pages/Home'));
@@ -47,24 +46,16 @@ const router = createBrowserRouter(
       <Route
         element={
           <Suspense fallback={<PageLoader />}>
-            <Layout />
+            <PublicLayout />
           </Suspense>
         }
       >
-        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={'/'} element={<Home />} />
+        <Route path={'/login'} element={<Login />} />
       </Route>
 
       <Route
-        path={ROUTES.LOGIN}
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <Login />
-          </Suspense>
-        }
-      />
-
-      <Route
-        path={ROUTES.ADMIN}
+        path={'/admin'}
         element={
           <Suspense fallback={<PageLoader />}>
             <ProtectedRoute>
@@ -73,7 +64,7 @@ const router = createBrowserRouter(
           </Suspense>
         }
       >
-        <Route path={ROUTES.ADMIN_DASHBOARD} element={<Dashboard />} />
+        <Route path={'/admin/dashboard'} element={<Dashboard />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />

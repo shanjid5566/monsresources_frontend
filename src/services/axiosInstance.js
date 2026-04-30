@@ -1,6 +1,20 @@
 import axios from 'axios';
-import { API_CONFIG, ROUTES } from '../config';
 import { API_ENDPOINTS } from './httpEndpoint';
+
+const API_CONFIG = {
+  BASE_URL: process.env.REACT_APP_API_BASE_URL || '',
+  VITALS_ENDPOINT: process.env.REACT_APP_VITALS_ENDPOINT || '',
+  TIMEOUT: parseInt(process.env.REACT_APP_API_TIMEOUT || '10000', 10),
+  RETRY_ATTEMPTS: parseInt(process.env.REACT_APP_API_RETRY_ATTEMPTS || '3', 10),
+  RETRY_DELAY: parseInt(process.env.REACT_APP_API_RETRY_DELAY || '1000', 10),
+};
+
+const ROUTES = {
+  HOME: '/',
+  LOGIN: '/login',
+  ADMIN: '/admin',
+  ADMIN_DASHBOARD: '/admin/dashboard',
+};
 import store from '../store/store';
 import { logout, loginSuccess } from '../store/slices/authSlice';
 

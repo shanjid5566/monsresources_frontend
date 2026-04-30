@@ -1,4 +1,12 @@
-import { SEO_CONFIG } from '../config';
+const SEO_CONFIG = {
+  DEFAULT_TITLE: process.env.REACT_APP_SEO_TITLE || 'PNW Jobs',
+  DEFAULT_DESCRIPTION:
+    process.env.REACT_APP_SEO_DESCRIPTION || 'Find your next job in the Pacific Northwest',
+  DEFAULT_KEYWORDS: (
+    process.env.REACT_APP_SEO_KEYWORDS || 'jobs,pacific northwest,employment'
+  ).split(','),
+  SITE_URL: typeof window !== 'undefined' ? window.location.origin : '',
+};
 
 export const generateMetadata = ({
   title,

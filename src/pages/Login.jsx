@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../store/slices/authSlice';
-import { ROUTES } from '../config';
+
+const ROUTES = {
+  HOME: '/',
+  LOGIN: '/login',
+  ADMIN: '/admin',
+  ADMIN_DASHBOARD: '/admin/dashboard',
+};
 
 import {
   LogIn,

@@ -1,5 +1,20 @@
 import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
-import { API_CONFIG } from '../config';
+
+const API_CONFIG = {
+  BASE_URL: process.env.REACT_APP_API_BASE_URL || '',
+  VITALS_ENDPOINT: process.env.REACT_APP_VITALS_ENDPOINT || '',
+  TIMEOUT: parseInt(process.env.REACT_APP_API_TIMEOUT || '10000', 10),
+  RETRY_ATTEMPTS: parseInt(process.env.REACT_APP_API_RETRY_ATTEMPTS || '3', 10),
+  RETRY_DELAY: parseInt(process.env.REACT_APP_API_RETRY_DELAY || '1000', 10),
+};
+
+const PERFORMANCE_BUDGETS = {
+  LCP: 2500,
+  FCP: 1800,
+  CLS: 0.1,
+  INP: 200,
+  TTFB: 800,
+};
 
 const vitalsUrl = API_CONFIG.VITALS_ENDPOINT;
 
@@ -106,8 +121,6 @@ export const detectLongTasks = () => {
     console.error('Long task detection not supported:', error);
   }
 };
-
-import { PERFORMANCE_BUDGETS } from '../config';
 
 export const performanceBudget = PERFORMANCE_BUDGETS;
 
