@@ -24,7 +24,7 @@ const Banner = () => {
 
   return (
     <section
-      className="relative w-full bg-cover bg-center bg-no-repeat min-h-[100svh]"
+      className="relative w-full bg-cover bg-center bg-no-repeat "
       style={{ backgroundImage: `url(${bannerImage})`,minHeight: "100svh" }}
       aria-label="Homepage banner"
     >
