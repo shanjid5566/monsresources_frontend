@@ -11,6 +11,7 @@ import PublicLayout from '../components/layout/public/PublicLayout';
 import AdminLayout from '../components/layout/admin/Layout';
 import { selectIsAuthenticated } from '../store/slices/authSlice';
 import Home from '../pages/public/home/Home';
+import FindJobs from '../pages/public/find_jobs/FindJobs';
 
 const Login = lazy(() => import('../pages/Login'));
 const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
         }
       >
         <Route path={'/'} element={<Home />} />
+        <Route path={'/find-jobs'} element={<FindJobs />} />
         <Route path={'/login'} element={<Login />} />
       </Route>
 

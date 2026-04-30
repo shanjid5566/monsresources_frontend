@@ -17,9 +17,9 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <div className='hidden lg:flex items-center gap-6'>
-              <a href='#' className='text-base font-medium text-[#0C0C0C] cursor-pointer mr-12'>
+              <Link to='/find-jobs' className='text-base font-medium text-[#0C0C0C] cursor-pointer mr-12'>
                 Find Jobs
-              </a>
+              </Link>
               <button
                 className='px-4 py-2 rounded-lg text-base font-semibold bg-[#1A5F37] text-white cursor-pointer'
               >
