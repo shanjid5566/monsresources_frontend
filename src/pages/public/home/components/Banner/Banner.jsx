@@ -1,27 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 
 const Banner = () => {
   const [jobTitle, setJobTitle] = useState("");
   const [location, setLocation] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
     console.log("Search:", { jobTitle, location });
   };
 
+  const bannerImage = isMobile ? "/home/mobile_banner.png" : "/home/banner.png";
+
   return (
     <section
-      className="relative w-full bg-cover bg-center bg-no-repeat min-h-screen"
-      style={{ backgroundImage: `url(/home/banner.png)` }}
+      className="relative w-full bg-cover bg-center bg-no-repeat min-h-[100svh]"
+      style={{ backgroundImage: `url(${bannerImage})`,minHeight: "100svh" }}
       aria-label="Homepage banner"
     >
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 text-center">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0F0F0F] leading-tight mb-2">
+        <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold text-[#0F0F0F] leading-tight mb-2">
           Find Your <span className="text-[#063D2E]">Next Job</span> in the
         </h1>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0F0F0F] leading-tight mb-6">
+        <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold text-[#0F0F0F] leading-tight mb-6">
           Pacific Northwest
         </h1>
 
