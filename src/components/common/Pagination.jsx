@@ -69,7 +69,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, siblingCount = 1 })
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="flex items-center gap-2 px-4 py-2 border border-[#063D2E] text-[#063D2E] font-semibold rounded hover:bg-[#063D2E] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="flex items-center gap-2 px-4 py-2 border border-[#063D2E] text-[#063D2E] font-semibold rounded hover:bg-[#063D2E] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
         <ChevronLeft size={18} />
         Previous
@@ -93,7 +93,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, siblingCount = 1 })
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`px-3 py-2 rounded font-semibold transition-colors ${
+              className={`px-3 py-2 rounded font-semibold cursor-pointer transition-colors ${
                 currentPage === page
                   ? 'bg-[#063D2E] text-white'
                   : 'border border-[#063D2E] text-[#063D2E] hover:bg-[#f0f0f0]'
@@ -109,7 +109,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, siblingCount = 1 })
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="flex items-center gap-2 px-4 py-2 border border-[#063D2E] text-[#063D2E] font-semibold rounded hover:bg-[#063D2E] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="flex items-center gap-2 px-4 py-2 border border-[#063D2E] text-[#063D2E] font-semibold rounded hover:bg-[#063D2E] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
         Next
         <ChevronRight size={18} />

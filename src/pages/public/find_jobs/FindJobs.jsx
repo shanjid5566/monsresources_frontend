@@ -1,6 +1,7 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import FindJobsBanner from './components/FindJobsBanner'
+import JobsFilterBar from './components/JobsFilterBar'
 import JobsGrid from '../../../components/common/JobsGrid'
 import Pagination from '../../../components/common/Pagination'
 
@@ -8,7 +9,10 @@ const FindJobs = () => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const itemsPerPage = 10
 
-	// Sample jobs data (replace with API call later)
+	// Scroll to top when page changes
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [currentPage])
 	const allJobs = [
 		{
 			id: 1,
@@ -150,9 +154,12 @@ const FindJobs = () => {
 				title="Browse Jobs"
 				subtitle="Explore jobs by location, role, and company"
 			/>
-
+			{/* Filter Bar */}
+			<div className="container mx-auto px-6 py-8">
+				<JobsFilterBar onSearch={() => {}} />
+			</div>
 			{/* Jobs Section */}
-			<section className="container mx-auto px-6 py-12">
+			<section className="container mx-auto px-6 md:py-12">
 				<div className="mb-6">
 					<h2 className="text-2xl font-semibold text-[#063D2E] mb-2">
 						Showing {currentJobs.length} jobs in PNW

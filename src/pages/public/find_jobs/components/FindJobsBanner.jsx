@@ -1,5 +1,4 @@
 import React from 'react'
-import JobsFilterBar from './JobsFilterBar'
 
 /**
  * FindJobsBanner
@@ -8,14 +7,12 @@ import JobsFilterBar from './JobsFilterBar'
  * - badge: small badge text (string)
  * - title: heading text (string)
  * - subtitle: subtext (string)
- * - onSearch: callback for search filter submission (function)
  */
 const FindJobsBanner = ({
   bgImage = '/find_jobs/find_jobs_banner.png',
   badge = 'Open Opportunities',
   title = 'Browse Jobs',
   subtitle = 'Explore jobs by location, role, and company',
-  onSearch = () => {},
 }) => {
   return (
     <section className="relative w-full">
@@ -25,8 +22,6 @@ const FindJobsBanner = ({
         style={{ backgroundImage: `url(${bgImage})` }}
         aria-label="Find jobs banner"
       >
-        <div className="absolute inset-0 bg-black/45"></div>
-
         <div className="relative container mx-auto px-6 py-28 lg:py-36 text-center">
           <div className="inline-block rounded-full px-3 py-1 bg-[#E6ECEA] text-[#484849] text-sm font-semibold mb-4">
             {badge}
@@ -40,11 +35,6 @@ const FindJobsBanner = ({
             {subtitle}
           </p>
         </div>
-      </div>
-
-      {/* Floating Filter Bar */}
-      <div className="relative container mx-auto px-6 -translate-y-1/2 z-10">
-        <JobsFilterBar onSearch={onSearch} />
       </div>
     </section>
   )
