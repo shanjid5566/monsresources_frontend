@@ -4,6 +4,7 @@ import FindJobsBanner from './components/FindJobsBanner'
 import JobsFilterBar from './components/JobsFilterBar'
 import JobsGrid from '../../../components/common/JobsGrid'
 import Pagination from '../../../components/common/Pagination'
+import CTABanner from '../../../components/common/CTABanner'
 
 const FindJobs = () => {
 	const [currentPage, setCurrentPage] = useState(1)
@@ -181,6 +182,8 @@ const FindJobs = () => {
 					siblingCount={1}
 				/>
 			</section>
+			<CTABanner/>
+
 		</main>
 	)
 }
