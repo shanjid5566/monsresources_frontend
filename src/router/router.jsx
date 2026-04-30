@@ -10,8 +10,8 @@ import { useSelector } from 'react-redux';
 import PublicLayout from '../components/layout/public/PublicLayout';
 import AdminLayout from '../components/layout/admin/Layout';
 import { selectIsAuthenticated } from '../store/slices/authSlice';
+import Home from '../pages/public/home/Home';
 
-const Home = lazy(() => import('../pages/Home'));
 const Login = lazy(() => import('../pages/Login'));
 const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
 
