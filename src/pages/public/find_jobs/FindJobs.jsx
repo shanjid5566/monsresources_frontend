@@ -153,9 +153,10 @@ const FindJobs = () => {
 				badge="Open Opportunities"
 				title="Browse Jobs"
 				subtitle="Explore jobs by location, role, and company"
+				onSearch={() => {}}
 			/>
-			{/* Filter Bar */}
-			<div className="container mx-auto px-6 py-8">
+			{/* Filter Bar - Mobile Only (below lg) */}
+			<div className="lg:hidden container mx-auto px-6 py-8">
 				<JobsFilterBar onSearch={() => {}} />
 			</div>
 			{/* Jobs Section */}
