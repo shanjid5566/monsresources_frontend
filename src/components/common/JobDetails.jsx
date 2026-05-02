@@ -254,6 +254,7 @@ const JobDetails = () => {
         onClose={() => setIsModalOpen(false)}
         jobTitle={job.title}
         company={job.company}
+        logo={job.logo}
       />
     </div>
   );

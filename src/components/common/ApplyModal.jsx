@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { X, Upload } from 'lucide-react'
+import ApplicationSuccessModal from './ApplicationSuccessModal'
 
-const ApplyModal = ({ isOpen, onClose, jobTitle, company }) => {
+const ApplyModal = ({ isOpen, onClose, jobTitle, company, logo }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     resume: null,
     coverLetter: '',
   })
-
   const [isDragActive, setIsDragActive] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -62,9 +63,9 @@ const ApplyModal = ({ isOpen, onClose, jobTitle, company }) => {
     e.preventDefault()
     // Add your form submission logic here
     console.log('Form submitted:', formData)
-    alert('Application submitted successfully!')
+    // Show success modal instead of closing
+    setShowSuccess(true)
     handleReset()
-    onClose()
   }
 
   const handleReset = () => {
@@ -77,6 +78,26 @@ const ApplyModal = ({ isOpen, onClose, jobTitle, company }) => {
   }
 
   if (!isOpen) return null
+
+  // If success modal is shown, don't render the form
+  if (showSuccess) {
+    return (
+      <ApplicationSuccessModal
+        isOpen={true}
+        onClose={() => {
+          setShowSuccess(false)
+          onClose()
+        }}
+        onKeepBrowsing={() => {
+          setShowSuccess(false)
+          onClose()
+        }}
+        jobTitle={jobTitle}
+        company={company}
+        logo={logo}
+      />
+    )
+  }
 
   return (
     <div className="fixed inset-0 bg-black/60 bg-opacity-50 flex items-center justify-center z-50 p-4">
