@@ -33,7 +33,11 @@ const Sidebar = ({ onClose = () => {} }) => {
   const userRole = user?.role || 'user';
   const menuItems = MENU_ITEMS[userRole] || MENU_ITEMS.user;
 
-  const isActive = (href) => location.pathname === href;
+  const isActive = (href) => {
+    const pathName = location.pathname;
+    // Check if current path matches or starts with the menu item href
+    return pathName === href || pathName.startsWith(href + '/');
+  };
 
   const handleMenuClick = () => {
     onClose();

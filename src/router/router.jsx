@@ -32,7 +32,9 @@ const Register = lazy(() => import('../pages/authentication/Register'));
 const ForgotPassword = lazy(() => import('../pages/authentication/ForgotPassword'));
 const Otp = lazy(() => import('../pages/authentication/Otp'));
 const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
-const JobListing = lazy(() => import('../pages/admin/JobListing'));
+const JobListing = lazy(() => import('../pages/admin/job_listing/JobListing'));
+const AddJobListing = lazy(() => import('../components/common/AddJobListing'));
+const UserJobListing = lazy(() => import('../pages/user/job_listing/JobListing'));
 
 const PageLoader = () => (
   <div className='flex items-center justify-center min-h-screen'>
@@ -91,6 +93,7 @@ const router = createBrowserRouter(
       >
         <Route path={'/admin/dashboard'} element={<Dashboard />} />
         <Route path={'/admin/jobs'} element={<JobListing />} />
+        <Route path={'/admin/jobs/add'} element={<AddJobListing />} />
       </Route>
 
       <Route
@@ -103,7 +106,8 @@ const router = createBrowserRouter(
           </Suspense>
         }
       >
-        <Route path={'/user/jobs'} element={<JobListing />} />
+        <Route path={'/user/jobs'} element={<UserJobListing />} />
+        <Route path={'/user/jobs/add'} element={<AddJobListing />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />
