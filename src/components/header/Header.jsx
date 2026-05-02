@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleEmployerRegister = () => {
+    navigate('/register', { state: { isEmployerRegister: true } });
+    setIsMenuOpen(false);
+  };
 
   return (
     <>
@@ -21,13 +27,14 @@ const Header = () => {
                 Find Jobs
               </Link>
               <button
-                className='px-4 py-2 rounded-lg text-base font-semibold bg-[#1A5F37] text-white cursor-pointer'
+                onClick={handleEmployerRegister}
+                className='px-4 py-2 rounded-lg text-base font-semibold bg-[#1A5F37] text-white cursor-pointer hover:bg-[#155630] transition-colors'
               >
                 Get Employers Account
               </button>
               <Link
                 to={'/login'}
-                className='px-4 py-2 rounded-lg text-base font-semibold bg-[#D4AF37] text-[#0C0C0C] cursor-pointer'
+                className='px-4 py-2 rounded-lg text-base font-semibold bg-[#D4AF37] text-[#0C0C0C] cursor-pointer hover:bg-[#c4a02e] transition-colors'
               >
                 Sign In
               </Link>
@@ -65,8 +72,8 @@ const Header = () => {
                 Find Jobs
               </a>
               <button
-                onClick={() => setIsMenuOpen(false)}
-                className='w-full px-4 py-2 rounded-lg text-sm font-semibold bg-[#1A5F37] text-white cursor-pointer'
+                onClick={handleEmployerRegister}
+                className='w-full px-4 py-2 rounded-lg text-sm font-semibold bg-[#1A5F37] text-white cursor-pointer hover:bg-[#155630] transition-colors'
               >
                 Get Employers Account
               </button>

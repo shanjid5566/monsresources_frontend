@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -7,6 +7,8 @@ const PHONE_REGEX = /^[0-9]{10,}$/;
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isEmployerRegister = location.state?.isEmployerRegister || false;
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -15,6 +17,8 @@ const Register = () => {
     phone: '',
     password: '',
     confirmPassword: '',
+    companyLocation: '',
+    companyHeadcountSize: '',
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -43,6 +47,16 @@ const Register = () => {
       errs.phone = 'Phone number is required.';
     } else if (!PHONE_REGEX.test(formData.phone.replace(/\D/g, ''))) {
       errs.phone = 'Phone number must be at least 10 digits.';
+    }
+
+    if (isEmployerRegister) {
+      if (!formData.companyLocation.trim()) {
+        errs.companyLocation = 'Company location is required.';
+      }
+
+      if (!formData.companyHeadcountSize.trim()) {
+        errs.companyHeadcountSize = 'Company headcount size is required.';
+      }
     }
 
     if (!formData.password) {
@@ -129,10 +143,12 @@ const Register = () => {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-[#000000] mb-2">
-              Create Account
+              {isEmployerRegister ? 'Create Employer Account' : 'Create Account'}
             </h1>
             <p className="text-[#373737]">
-              Sign up to get started with our platform.
+              {isEmployerRegister 
+                ? 'Sign up to start hiring and managing job postings.' 
+                : 'Sign up to get started with our platform.'}
             </p>
           </div>
 
@@ -211,6 +227,47 @@ const Register = () => {
               )}
             </div>
 
+            {/* Conditional Employer Fields */}
+            {isEmployerRegister && (
+              <div className="grid grid-cols-2 gap-4">
+                {/* Company Location */}
+                <div>
+                  <label className="block text-sm font-semibold text-[#000000] mb-2">
+                    Company Location
+                  </label>
+                  <input
+                    type="text"
+                    name="companyLocation"
+                    value={formData.companyLocation}
+                    onChange={handleChange}
+                    placeholder="Enter your company address..."
+                    className="w-full px-4 py-3 border border-[#E6ECEA] rounded-lg focus:outline-none focus:border-[#063D2E] bg-[#E6ECEA] text-[#373737] placeholder-[#373737]"
+                  />
+                  {errors.companyLocation && (
+                    <p className="text-red-500 text-sm mt-1">{errors.companyLocation}</p>
+                  )}
+                </div>
+
+                {/* Company Headcount Size */}
+                <div>
+                  <label className="block text-sm font-semibold text-[#000000] mb-2">
+                    Company Headcount Size
+                  </label>
+                  <input
+                    type="text"
+                    name="companyHeadcountSize"
+                    value={formData.companyHeadcountSize}
+                    onChange={handleChange}
+                    placeholder="Enter your company headcount size..."
+                    className="w-full px-4 py-3 border border-[#E6ECEA] rounded-lg focus:outline-none focus:border-[#063D2E] bg-[#E6ECEA] text-[#373737] placeholder-[#373737]"
+                  />
+                  {errors.companyHeadcountSize && (
+                    <p className="text-red-500 text-sm mt-1">{errors.companyHeadcountSize}</p>
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* Password */}
             <div>
               <label className="block text-sm font-semibold text-[#000000] mb-2">
@@ -271,12 +328,12 @@ const Register = () => {
               disabled={isLoading}
               className="w-full px-6 py-3 bg-[#063D2E] text-white font-semibold rounded-lg hover:bg-[#052d24] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-6"
             >
-              {isLoading ? 'Creating Account...' : 'Sign Up'}
+              {isLoading ? (isEmployerRegister ? 'Creating Employer Account...' : 'Creating Account...') : (isEmployerRegister ? 'Create Employer Account' : 'Sign Up')}
             </button>
           </form>
 
           {/* Login Link */}
-          <div className="mt-6 text-center">
+          <div className="mt-4 text-center">
             <p className="text-[#373737]">
               Already have an account?{' '}
               <Link
