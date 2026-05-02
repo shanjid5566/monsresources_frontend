@@ -23,21 +23,21 @@ export default function AddJobListing() {
 
   // State for storing form data
   const [formData, setFormData] = useState({
-    jobTitle: 'Senior Frontend Engineer',
-    companyName: 'TechFlow Seattle',
+    jobTitle: '',
+    companyName: '',
     logo: null,
-    location: 'Seattle, WA (Remote Optional)',
-    salary: '$160k - $210k',
+    location: '',
+    salary: '',
     jobType: 'Full-time',
-    experience: 'Senior',
+    experience: 'Junior',
     category: 'Engineering',
-    shortDescription: 'We are looking for a Senior Frontend Engineer specialized in React and Motion to build immersive experiences for our cloud platform.',
-    aboutRole: 'TechFlow is the leading cloud optimization platform in the Pacific Northwest. We are scaling our core engineering team in Seattle to build the next generation of cloud management tools. As a Senior Frontend Engineer, you will lead the development of our flagship dashboard, focusing on performance, accessibility, and high-fidelity animations.',
-    responsibilities: 'Lead the frontend architecture of our core dashboard product\nMentor junior and mid-level engineers through code reviews and workshops\nCollaborate with Product Designers to implement pixel-perfect, accessible UIs\nOptimize application performance for large datasets',
-    requirements: '5+ years of professional experience with React and TypeScript\nExtensive knowledge of CSS animation libraries (Motion, GSAP)\nExperience with state management (Redux, Zustand, or XState)\nStrong understanding of web performance optimization techniques',
-    benefits: 'Competitive salary and equity package\nFull health, dental, and vision insurance\nFlexible working hours and hybrid options\nAnnual learning and development budget',
-    deadline: '2026-06-30',
-    email: 'hr@techflow.com'
+    shortDescription: '',
+    aboutRole: '',
+    responsibilities: '',
+    requirements: '',
+    benefits: '',
+    deadline: '',
+    email: ''
   });
 
   // State for customizing application form questions
@@ -139,7 +139,7 @@ export default function AddJobListing() {
           <div className="lg:col-span-5 space-y-6">
             
             {/* Basic Details Card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6">
+            <div className="bg-[#F0ECE3] rounded-2xl shadow-sm border border-slate-200/60 p-6">
               <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
                 <Briefcase className="w-5 h-5 text-teal-600" />
                 Basic Details
@@ -150,7 +150,7 @@ export default function AddJobListing() {
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-slate-700 mb-3">Company Logo</label>
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-[#f8f9fa] border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden relative group cursor-pointer hover:bg-slate-50 transition-colors">
+                    <div className="w-16 h-16 rounded-full bg-[#F6F2E8] border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden relative group cursor-pointer hover:bg-slate-50 transition-colors">
                       {formData.logo ? (
                         <img src={formData.logo} alt="Logo" className="w-full h-full object-cover" />
                       ) : (
@@ -178,7 +178,7 @@ export default function AddJobListing() {
                     name="jobTitle"
                     value={formData.jobTitle}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                    className="w-full px-4 py-2.5 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
                     placeholder="e.g. Senior Product Designer"
                   />
                 </div>
@@ -191,7 +191,7 @@ export default function AddJobListing() {
                       name="companyName"
                       value={formData.companyName}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                      className="w-full px-4 py-2.5 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
                       placeholder="e.g. TechFlow"
                     />
                   </div>
@@ -202,7 +202,7 @@ export default function AddJobListing() {
                       name="location"
                       value={formData.location}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                      className="w-full px-4 py-2.5 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
                       placeholder="e.g. Seattle, WA"
                     />
                   </div>
@@ -216,7 +216,7 @@ export default function AddJobListing() {
                       name="salary"
                       value={formData.salary}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                      className="w-full px-4 py-2.5 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
                       placeholder="e.g. $120k - $160k"
                     />
                   </div>
@@ -227,7 +227,7 @@ export default function AddJobListing() {
                         name="jobType"
                         value={formData.jobType}
                         onChange={handleChange}
-                        className="w-full px-4 py-2.5 bg-[#f8f9fa] border border-slate-200 rounded-xl appearance-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                        className="w-full px-4 py-2.5 bg-[#F6F2E8] border border-slate-200 rounded-xl appearance-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
                       >
                         <option>Full-time</option>
                         <option>Part-time</option>
@@ -247,7 +247,7 @@ export default function AddJobListing() {
                         name="experience"
                         value={formData.experience}
                         onChange={handleChange}
-                        className="w-full px-4 py-2.5 bg-[#f8f9fa] border border-slate-200 rounded-xl appearance-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                        className="w-full px-4 py-2.5 bg-[#F6F2E8] border border-slate-200 rounded-xl appearance-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
                       >
                         <option>Junior</option>
                         <option>Mid-level</option>
@@ -264,7 +264,7 @@ export default function AddJobListing() {
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
-                        className="w-full px-4 py-2.5 bg-[#f8f9fa] border border-slate-200 rounded-xl appearance-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                        className="w-full px-4 py-2.5 bg-[#F6F2E8] border border-slate-200 rounded-xl appearance-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
                       >
                         <option>Engineering</option>
                         <option>Design</option>
@@ -279,7 +279,7 @@ export default function AddJobListing() {
             </div>
 
             {/* Description & More Card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6">
+            <div className="bg-[#F0ECE3] rounded-2xl shadow-sm border border-slate-200/60 p-6">
               <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
                 <Mail className="w-5 h-5 text-teal-600" />
                 Description & More
@@ -293,7 +293,7 @@ export default function AddJobListing() {
                     value={formData.shortDescription}
                     onChange={handleChange}
                     rows="4"
-                    className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="Brief summary of the role..."
                   ></textarea>
                 </div>
@@ -305,7 +305,7 @@ export default function AddJobListing() {
                     value={formData.aboutRole}
                     onChange={handleChange}
                     rows="5"
-                    className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="Tell us about the role expectations..."
                   ></textarea>
                 </div>
@@ -317,7 +317,7 @@ export default function AddJobListing() {
                     value={formData.responsibilities}
                     onChange={handleChange}
                     rows="6"
-                    className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="List the main responsibilities..."
                   ></textarea>
                 </div>
@@ -329,7 +329,7 @@ export default function AddJobListing() {
                     value={formData.requirements}
                     onChange={handleChange}
                     rows="6"
-                    className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="List the job requirements..."
                   ></textarea>
                 </div>
@@ -341,7 +341,7 @@ export default function AddJobListing() {
                     value={formData.benefits}
                     onChange={handleChange}
                     rows="6"
-                    className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="List the benefits and perks..."
                   ></textarea>
                 </div>
@@ -354,7 +354,7 @@ export default function AddJobListing() {
                       name="deadline"
                       value={formData.deadline}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                      className="w-full px-4 py-2.5 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
                     />
                   </div>
                   <div>
@@ -364,7 +364,7 @@ export default function AddJobListing() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                      className="w-full px-4 py-2.5 bg-[#F6F2E8] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
                       placeholder="hr@company.com"
                     />
                   </div>
@@ -373,7 +373,7 @@ export default function AddJobListing() {
             </div>
 
             {/* Customize Application Form Section */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6">
+            <div className="bg-[#F0ECE3] rounded-2xl shadow-sm border border-slate-200/60 p-6">
               <div className="mb-6">
                 <h2 className="text-xl font-bold text-slate-900 mb-2">Customize Application Form</h2>
                 <p className="text-sm text-slate-500">Create the form applicants will fill out by choosing what information you want to collect from them.</p>
@@ -381,20 +381,20 @@ export default function AddJobListing() {
 
               <div className="space-y-4">
                 {applicationQuestions.map((q) => (
-                  <div key={q.id} className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-5 space-y-4">
+                  <div key={q.id} className="bg-[#F6F2E8] border border-slate-200 rounded-xl p-5 space-y-4">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                       <input
                         type="text"
                         placeholder="Question"
                         value={q.questionText}
                         onChange={(e) => updateQuestionText(q.id, e.target.value)}
-                        className="flex-1 bg-transparent border-b border-slate-300 px-2 py-1.5 focus:border-teal-600 outline-none transition-colors text-slate-800"
+                        className="flex-1 px-3 py-2.5 bg-[#F6F2E8] border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-slate-800 placeholder-slate-400 font-medium"
                       />
                       <div className="relative w-full sm:w-48 flex-shrink-0">
                         <select
                           value={q.type}
                           onChange={(e) => updateQuestionType(q.id, e.target.value)}
-                          className="w-full bg-[#eef0f2] text-slate-700 border-none rounded-lg px-3 py-2.5 appearance-none outline-none text-sm focus:ring-2 focus:ring-teal-500/30"
+                          className="w-full bg-[#F6F2E8] text-slate-700 border border-slate-300 rounded-lg px-3 py-2.5 appearance-none outline-none text-sm focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all"
                         >
                           <option value="Single Choice">Single Choice</option>
                           <option value="Multiple Choice">Multiple Choice</option>
@@ -440,9 +440,11 @@ export default function AddJobListing() {
 
                     {q.type === 'Paragraph' && (
                       <div className="pl-2 mt-2">
-                        <div className="w-full border-b border-dotted border-slate-300 px-2 py-1 text-sm text-slate-400">
-                          Long answer text
-                        </div>
+                        <textarea
+                          placeholder="Long answer text"
+                          rows="4"
+                          className="w-full px-3 py-2 bg-[#F6F2E8] border border-slate-300 rounded-lg text-sm text-slate-700 resize-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all"
+                        ></textarea>
                       </div>
                     )}
                   </div>
@@ -613,7 +615,7 @@ export default function AddJobListing() {
                         </div>
                         <div className="flex items-center gap-3 text-slate-600">
                           <Calendar className="w-5 h-5 text-slate-400" />
-                          <span className="text-sm">Apply by: {formData.deadline || 'N/A'}</span>
+                          <span className="text-sm">Deadline: {formData.deadline || 'N/A'}</span>
                         </div>
                       </div>
                     </div>
