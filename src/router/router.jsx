@@ -13,6 +13,7 @@ import { selectIsAuthenticated } from '../store/slices/authSlice';
 import Home from '../pages/public/home/Home';
 import FindJobs from '../pages/public/find_jobs/FindJobs';
 import JobDetails from '../components/common/JobDetails';
+import ResetPassword from '../pages/authentication/ResetPassword';
 
 const Login = lazy(() => import('../pages/authentication/Login'));
 const ForgotPassword = lazy(() => import('../pages/authentication/ForgotPassword'));
@@ -61,6 +62,7 @@ const router = createBrowserRouter(
         <Route path={'/login'} element={<Login />} />
         <Route path={'/forgot-password'} element={<ForgotPassword />} />
         <Route path={'/otp'} element={<Otp />} />
+        <Route path={'/reset-password'} element={<ResetPassword />} />
 
       <Route
         path={'/admin'}

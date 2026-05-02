@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
 const ROUTES = {
@@ -9,6 +9,7 @@ const ROUTES = {
 
 const Otp = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [code, setCode] = useState(['', '', '', '']);
   const [isVerifying, setIsVerifying] = useState(false);
   const [isResent, setIsResent] = useState(false);
@@ -50,7 +51,8 @@ const Otp = () => {
     // simulate verification
     setTimeout(() => {
       setIsVerifying(false);
-      navigate(ROUTES.ADMIN_DASHBOARD);
+      // proceed to reset password flow after successful OTP
+      navigate('/reset-password', { state: { email: location.state?.email } });
     }, 800);
   };
 
@@ -76,7 +78,7 @@ const Otp = () => {
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="mb-4 inline-flex items-center gap-2 px-3 py-1 border border-[#D3C085] text-[#063D2E] rounded hover:bg-[#F0EFEA] cursor-pointer"
+                className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 border border-[#063D2E] text-[#063D2E] rounded hover:bg-[#F0EFEA] cursor-pointer"
                 aria-label="Go back"
               >
                 <ArrowLeft size={16} />
@@ -110,7 +112,7 @@ const Otp = () => {
                 <button
                   type="submit"
                   disabled={isVerifying}
-                  className="w-full px-6 py-3 bg-[#063D2E] text-white font-semibold rounded-lg hover:bg-[#052d24] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-6 py-3 bg-[#063D2E] text-white font-semibold rounded-lg hover:bg-[#052d24] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {isVerifying ? 'Verifying...' : 'Verify'}
                 </button>
@@ -120,10 +122,6 @@ const Otp = () => {
                 <button type="button" onClick={handleResend} className="font-medium text-[#063D2E] hover:underline">
                   {isResent ? 'Resent ✓' : "Didn't receive a code? Resend"}
                 </button>
-              </div>
-
-              <div className="mt-2 text-center">
-                <Link to={ROUTES.LOGIN} className="text-sm font-semibold text-[#063D2E] hover:underline">Use email to sign in</Link>
               </div>
             </form>
           </div>
