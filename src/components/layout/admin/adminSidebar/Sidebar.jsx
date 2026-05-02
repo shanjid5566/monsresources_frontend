@@ -24,7 +24,7 @@ const MENU_ITEMS = {
   ],
 };
 
-const Sidebar = () => {
+const Sidebar = ({ onClose = () => {} }) => {
   const user = useSelector((state) => state.auth.user);
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,6 +33,10 @@ const Sidebar = () => {
   const menuItems = MENU_ITEMS[userRole] || MENU_ITEMS.user;
 
   const isActive = (href) => location.pathname === href;
+
+  const handleMenuClick = () => {
+    onClose();
+  };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -43,8 +47,9 @@ const Sidebar = () => {
     <aside className="w-64 bg-[#FDF9EE] text-gray-900 flex flex-col h-screen border-r border-gray-300">
       {/* Logo */}
       <div className="px-6 py-3 border-b border-gray-300">
-        <h1 className="text-xl font-bold">MonsJobs</h1>
-        <p className="text-xs text-gray-600 mt-1 capitalize">{userRole} Panel</p>
+        <Link to="/" onClick={handleMenuClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <img src="/logo.png" alt="MonsJobs" className="h-12 w-auto" />
+        </Link>
       </div>
 
       {/* Menu */}
@@ -56,6 +61,7 @@ const Sidebar = () => {
             <Link
               key={item.href}
               to={item.href}
+              onClick={handleMenuClick}
               className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors ${
                 active
                   ? 'bg-[#063D2E] text-white'
