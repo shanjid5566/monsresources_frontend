@@ -5,9 +5,10 @@ import { LayoutDashboard, Briefcase, Users, Settings, LogOut } from 'lucide-reac
 import { logout } from '../../../../store/slices/authSlice';
 
 const MENU_ITEMS = {
-  user: [
+  admin: [
     { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
-    { icon: Briefcase, label: 'My Applications', href: '/admin/applications' },
+    { icon: Briefcase, label: 'Job Postings', href: '/admin/jobs' },
+    { icon: Users, label: 'Users & Applicants', href: '/admin/users' },
     { icon: Settings, label: 'Settings', href: '/admin/settings' },
   ],
   hr: [
@@ -16,10 +17,9 @@ const MENU_ITEMS = {
     { icon: Users, label: 'Applicants', href: '/admin/applicants' },
     { icon: Settings, label: 'Settings', href: '/admin/settings' },
   ],
-  admin: [
+  user: [
     { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
-    { icon: Briefcase, label: 'Job Postings', href: '/admin/jobs' },
-    { icon: Users, label: 'Users & Applicants', href: '/admin/users' },
+    { icon: Briefcase, label: 'My Applications', href: '/admin/applications' },
     { icon: Settings, label: 'Settings', href: '/admin/settings' },
   ],
 };

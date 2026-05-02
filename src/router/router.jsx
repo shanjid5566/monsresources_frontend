@@ -15,6 +15,17 @@ import FindJobs from '../pages/public/find_jobs/FindJobs';
 import JobDetails from '../components/common/JobDetails';
 import ResetPassword from '../pages/authentication/ResetPassword';
 
+const ROUTES = {
+  HOME: '/',
+  LOGIN: '/login',
+  FORGOT_PASSWORD: '/forgot-password',
+  OTP: '/otp',
+  RESET_PASSWORD: '/reset-password',
+  ADMIN: '/admin',
+  ADMIN_DASHBOARD: '/admin/dashboard',
+  FIND_JOBS: '/find-jobs',
+};
+
 const Login = lazy(() => import('../pages/authentication/Login'));
 const ForgotPassword = lazy(() => import('../pages/authentication/ForgotPassword'));
 const Otp = lazy(() => import('../pages/authentication/Otp'));
@@ -83,3 +94,4 @@ const router = createBrowserRouter(
 );
 
 export default router;
+export { ROUTES };
