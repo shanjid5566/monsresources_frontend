@@ -209,21 +209,47 @@ const Login = () => {
           </div>
 
           {/* Demo Credentials */}
-          <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-xs font-semibold text-blue-900 mb-3">Demo Credentials:</p>
-            <div className="space-y-2 text-xs text-blue-800">
-              <div>
-                <p className="font-medium">Admin:</p>
-                <p className="text-blue-700">admin@test.com / admin123456</p>
-              </div>
-              <div>
-                <p className="font-medium">HR Manager:</p>
-                <p className="text-blue-700">hr@test.com / hr123456</p>
-              </div>
-              <div>
-                <p className="font-medium">Employee:</p>
-                <p className="text-blue-700">user@test.com / user123456</p>
-              </div>
+          <div className="mt-8">
+            <p className="text-center text-sm font-semibold text-[#000000] mb-4">Demo Login Credentials</p>
+            <div className="space-y-3">
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('user@test.com');
+                  setPassword('user123456');
+                  setErrors({});
+                }}
+                className="w-full px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors cursor-pointer"
+              >
+                <div className="font-medium">User Login</div>
+                <div className="text-xs">user@test.com</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('hr@test.com');
+                  setPassword('hr123456');
+                  setErrors({});
+                }}
+                className="w-full px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors cursor-pointer"
+              >
+                <div className="font-medium">HR Manager Login</div>
+                <div className="text-xs">hr@test.com</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('admin@test.com');
+                  setPassword('admin123456');
+                  setErrors({});
+                }}
+                className="w-full px-6 py-3 bg-pink-600 text-white font-semibold rounded-lg hover:bg-pink-700 transition-colors cursor-pointer"
+              >
+                <div className="font-medium">Admin Login</div>
+                <div className="text-xs">admin@test.com</div>
+              </button>
             </div>
           </div>
         </div>
