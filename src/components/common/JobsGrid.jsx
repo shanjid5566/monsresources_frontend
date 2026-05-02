@@ -6,7 +6,11 @@ const JobsGrid = ({ jobs = [], isFromDashboard = false }) => {
   const navigate = useNavigate()
 
   const handleViewDetails = (jobId) => {
-    navigate(`/jobs/${jobId}`)
+    if (isFromDashboard) {
+      navigate(`/jobs/${jobId}`, { state: { fromDashboard: true } })
+    } else {
+      navigate(`/jobs/${jobId}`)
+    }
   }
 
   const handleEdit = (jobId) => {
