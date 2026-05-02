@@ -18,6 +18,7 @@ import ResetPassword from '../pages/authentication/ResetPassword';
 const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
+  REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   OTP: '/otp',
   RESET_PASSWORD: '/reset-password',
@@ -27,6 +28,7 @@ const ROUTES = {
 };
 
 const Login = lazy(() => import('../pages/authentication/Login'));
+const Register = lazy(() => import('../pages/authentication/Register'));
 const ForgotPassword = lazy(() => import('../pages/authentication/ForgotPassword'));
 const Otp = lazy(() => import('../pages/authentication/Otp'));
 const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
@@ -71,6 +73,7 @@ const router = createBrowserRouter(
         <Route path={'/jobs/:id'} element={<JobDetails />} />
       </Route>
         <Route path={'/login'} element={<Login />} />
+        <Route path={'/register'} element={<Register />} />
         <Route path={'/forgot-password'} element={<ForgotPassword />} />
         <Route path={'/otp'} element={<Otp />} />
         <Route path={'/reset-password'} element={<ResetPassword />} />
