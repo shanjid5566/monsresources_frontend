@@ -480,7 +480,7 @@ export default function AddJobListing() {
               </div>
 
               {/* Preview Canvas (Matching the provided design style) */}
-              <div className="bg-[#e8e4db] p-4 md:p-8 rounded-3xl shadow-sm space-y-6">
+              <div className="bg-[#EBE5D9] p-4 md:p-8 rounded-3xl shadow-sm space-y-6">
                 
                 {/* Header Card */}
                 <div className="bg-[#f0ece3] rounded-2xl p-6 md:p-8 border border-[#dcd8ce]">
