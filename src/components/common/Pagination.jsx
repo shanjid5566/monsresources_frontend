@@ -93,7 +93,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, siblingCount = 1 })
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`px-3 py-2 rounded font-semibold cursor-pointer transition-colors ${
+              className={`w-10 h-10 flex items-center justify-center rounded font-semibold cursor-pointer transition-colors ${
                 currentPage === page
                   ? 'bg-[#063D2E] text-white'
                   : 'border border-[#063D2E] text-[#063D2E] hover:bg-[#f0f0f0]'
