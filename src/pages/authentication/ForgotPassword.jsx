@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 
 const ROUTES = {
   LOGIN: '/login',
+  OTP: '/otp',
 };
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,8 +27,8 @@ const ForgotPassword = () => {
     setTimeout(() => {
       setIsSending(false);
       setSent(true);
-      // optionally redirect back to login after a short delay
-      setTimeout(() => navigate(ROUTES.LOGIN), 2500);
+      // navigate to OTP verification page after sending code
+      navigate(ROUTES.OTP, { state: { email } });
     }, 1000);
   };
 
@@ -72,7 +73,7 @@ const ForgotPassword = () => {
                   type="email"
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                  placeholder=""
+                  placeholder="Enter your email here..."
                   className="w-full px-4 py-3 border border-[#E6ECEA] rounded-lg focus:outline-none focus:border-[#063D2E] bg-[#E6ECEA] text-[#373737] placeholder-[#373737]"
                 />
                 {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
@@ -81,7 +82,7 @@ const ForgotPassword = () => {
               <button
                 type="submit"
                 disabled={isSending}
-                className="w-full px-6 py-3 bg-[#063D2E] text-white font-semibold rounded-lg hover:bg-[#052d24] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-6 py-3 bg-[#063D2E] text-white font-semibold rounded-lg hover:bg-[#052d24] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isSending ? 'Sending...' : 'Send Code'}
               </button>
