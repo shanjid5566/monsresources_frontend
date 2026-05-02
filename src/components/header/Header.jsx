@@ -25,11 +25,12 @@ const Header = () => {
               >
                 Get Employers Account
               </button>
-              <button
+              <Link
+                to={'/login'}
                 className='px-4 py-2 rounded-lg text-base font-semibold bg-[#D4AF37] text-[#0C0C0C] cursor-pointer'
               >
                 Sign In
-              </button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -69,12 +70,13 @@ const Header = () => {
               >
                 Get Employers Account
               </button>
-              <button
+              <Link
+                to={'/login'}
                 onClick={() => setIsMenuOpen(false)}
-                className='w-full px-4 py-2 rounded-lg text-sm font-semibold bg-[#D4AF37] text-[#0C0C0C] cursor-pointer'
+                className='w-full block px-4 py-2 rounded-lg text-sm font-semibold bg-[#D4AF37] text-[#0C0C0C] text-center cursor-pointer'
               >
                 Sign In
-              </button>
+              </Link>
             </div>
           </div>
         </>
