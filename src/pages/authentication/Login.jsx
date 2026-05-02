@@ -49,9 +49,36 @@ const Login = () => {
 
     setIsLoading(true);
     try {
-      // Simulate API call
+      // Simulate API call - demo accounts
       setTimeout(() => {
-        dispatch(loginSuccess({ email }));
+        let userRole = 'user';
+        let userName = 'User';
+
+        if (email === 'admin@test.com' && password === 'admin123456') {
+          userRole = 'admin';
+          userName = 'Admin User';
+        } else if (email === 'hr@test.com' && password === 'hr123456') {
+          userRole = 'hr';
+          userName = 'HR Manager';
+        } else if (email === 'user@test.com' && password === 'user123456') {
+          userRole = 'user';
+          userName = 'Employee User';
+        } else {
+          // Default demo user
+          userName = email.split('@')[0];
+        }
+
+        dispatch(
+          loginSuccess({
+            user: {
+              id: Math.random(),
+              email,
+              name: userName,
+              role: userRole,
+            },
+            token: `demo-token-${Date.now()}`,
+          })
+        );
         navigate(ROUTES.ADMIN_DASHBOARD);
       }, 1000);
     } catch (error) {
@@ -179,6 +206,25 @@ const Login = () => {
                 Sign Up
               </Link>
             </p>
+          </div>
+
+          {/* Demo Credentials */}
+          <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-xs font-semibold text-blue-900 mb-3">Demo Credentials:</p>
+            <div className="space-y-2 text-xs text-blue-800">
+              <div>
+                <p className="font-medium">Admin:</p>
+                <p className="text-blue-700">admin@test.com / admin123456</p>
+              </div>
+              <div>
+                <p className="font-medium">HR Manager:</p>
+                <p className="text-blue-700">hr@test.com / hr123456</p>
+              </div>
+              <div>
+                <p className="font-medium">Employee:</p>
+                <p className="text-blue-700">user@test.com / user123456</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

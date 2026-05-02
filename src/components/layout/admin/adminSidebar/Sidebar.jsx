@@ -1,195 +1,87 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, Briefcase, Users, Settings, LogOut } from 'lucide-react';
+import { logout } from '../../../../store/slices/authSlice';
+
+const MENU_ITEMS = {
+  user: [
+    { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
+    { icon: Briefcase, label: 'My Applications', href: '/admin/applications' },
+    { icon: Settings, label: 'Settings', href: '/admin/settings' },
+  ],
+  hr: [
+    { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
+    { icon: Briefcase, label: 'Job Postings', href: '/admin/jobs' },
+    { icon: Users, label: 'Applicants', href: '/admin/applicants' },
+    { icon: Settings, label: 'Settings', href: '/admin/settings' },
+  ],
+  admin: [
+    { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
+    { icon: Briefcase, label: 'Job Postings', href: '/admin/jobs' },
+    { icon: Users, label: 'Users & Applicants', href: '/admin/users' },
+    { icon: Settings, label: 'Settings', href: '/admin/settings' },
+  ],
+};
 
 const Sidebar = () => {
+  const user = useSelector((state) => state.auth.user);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userRole = user?.role || 'user';
+  const menuItems = MENU_ITEMS[userRole] || MENU_ITEMS.user;
+
+  const isActive = (href) => location.pathname === href;
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
+
   return (
-    <aside className='w-64 bg-gray-900 text-white p-4'>
-      <div className='font-bold text-lg mb-8'>Sidebar</div>
-      <nav className='space-y-2'>
-        <div className='text-sm text-gray-400'>Navigation items</div>
+    <aside className="w-64 bg-[#FDF9EE] text-gray-900 flex flex-col h-screen border-r border-gray-300">
+      {/* Logo */}
+      <div className="px-6 py-3 border-b border-gray-300">
+        <h1 className="text-xl font-bold">MonsJobs</h1>
+        <p className="text-xs text-gray-600 mt-1 capitalize">{userRole} Panel</p>
+      </div>
+
+      {/* Menu */}
+      <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+        {menuItems.map((item) => {
+          const Icon = item.icon;
+          const active = isActive(item.href);
+          return (
+            <Link
+              key={item.href}
+              to={item.href}
+              className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors ${
+                active
+                  ? 'bg-[#063D2E] text-white'
+                  : 'text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              <Icon size={20} />
+              <span className="text-base font-medium">{item.label}</span>
+            </Link>
+          );
+        })}
       </nav>
+
+      {/* Logout */}
+      <div className="p-4 border-t border-gray-300">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 w-full px-4 py-2.5 rounded-lg text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors"
+        >
+          <LogOut size={20} />
+          <span className="text-sm font-medium">Logout</span>
+        </button>
+      </div>
     </aside>
   );
 };
 
 export default Sidebar;
-  onClose,
-  onDesktopClose,
-  onAutoCollapse,
-  isCollapsed,
-  onExpand,
-}) => {
-  const navigate = useNavigate();
-  const user = useSelector(selectUser);
-
-  const handleLogout = () => {
-    toast.success('Signed out successfully');
-    setTimeout(() => navigate(ROUTES.LOGIN), 900);
-  };
-
-  if (isCollapsed) {
-    return (
-      <div className='h-full w-full bg-white flex flex-col items-center border-r border-gray-100 py-3 gap-1'>
-        <button
-          type='button'
-          onClick={onExpand}
-          title='Expand sidebar'
-          aria-label='Expand sidebar'
-          className='w-10 h-10 flex items-center justify-center rounded-lg text-gray-500 hover:text-gray-800 hover:bg-orange-50/40 transition-colors duration-200 mb-2 shrink-0'
-        >
-          <ChevronsRight size={20} aria-hidden='true' />
-        </button>
-
-        <nav
-          className='flex-1 flex flex-col items-center gap-1 w-full px-2 overflow-y-auto'
-          aria-label='Main navigation'
-        >
-          {NAV_ITEMS.map(({ name, path, icon: Icon, autoCollapse }) => (
-            <NavLink
-              key={path}
-              to={path}
-              end={path === ROUTES.ADMIN_DASHBOARD}
-              title={name}
-              onClick={() => {
-                onClose();
-                if (autoCollapse && onAutoCollapse) onAutoCollapse();
-              }}
-              className={({ isActive }) =>
-                `w-10 h-10 flex items-center justify-center rounded-lg transition-colors duration-200 ${
-                  isActive
-                    ? 'bg-orange-100 text-orange-600'
-                    : 'text-gray-400 hover:text-gray-900 hover:bg-orange-50/40'
-                }`
-              }
-            >
-              <Icon size={20} aria-hidden='true' />
-            </NavLink>
-          ))}
-        </nav>
-
-        <button
-          type='button'
-          onClick={handleLogout}
-          title='Sign Out'
-          aria-label='Sign Out'
-          className='mt-1 w-10 h-10 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors duration-200 shrink-0'
-        >
-          <LogOut size={20} aria-hidden='true' />
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <div className='h-full w-full bg-white flex flex-col border-r border-gray-100'>
-      <div className='flex items-start justify-between px-5 pt-5 pb-4 border-b border-gray-100 shrink-0'>
-        <div>
-          <img
-            src='/maktech_logo.png'
-            alt='Maktech'
-            width={120}
-            height={32}
-            fetchPriority='high'
-            className='h-8 w-auto object-contain'
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-            }}
-          />
-          <p className='text-sm text-gray-400 mt-1.5'>Admin Dashboard</p>
-        </div>
-        <button
-          type='button'
-          onClick={onClose}
-          className='lg:hidden mt-0.5 p-1.5 -mr-1 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors'
-          aria-label='Close navigation'
-        >
-          <X size={20} aria-hidden='true' />
-        </button>
-        <button
-          type='button'
-          onClick={onDesktopClose}
-          className='hidden lg:flex items-center justify-center mt-0.5 p-1.5 -mr-1 rounded-md text-gray-500 hover:text-gray-900 hover:bg-orange-50/40 transition-colors'
-          aria-label='Collapse sidebar'
-        >
-          <ChevronsLeft size={20} aria-hidden='true' />
-        </button>
-      </div>
-
-      <nav
-        className='flex-1 overflow-y-auto px-3 py-5'
-        aria-label='Main navigation'
-      >
-        <p className='px-3 mb-3 text-xs font-semibold text-gray-400 uppercase tracking-[0.08em]'>
-          Main Menu
-        </p>
-        <ul className='space-y-1.5' role='list'>
-          {NAV_ITEMS.map(({ name, path, icon: Icon, autoCollapse }) => (
-            <li key={path}>
-              <NavLink
-                to={path}
-                end={path === ROUTES.ADMIN_DASHBOARD}
-                onClick={() => {
-                  onClose();
-                  if (autoCollapse && onAutoCollapse) onAutoCollapse();
-                }}
-                className={getNavClass}
-              >
-                {({ isActive }) => (
-                  <>
-                    <Icon
-                      size={20}
-                      aria-hidden='true'
-                      className={`shrink-0 transition-colors ${
-                        isActive
-                          ? 'text-orange-600'
-                          : 'text-gray-400 group-hover:text-gray-500'
-                      }`}
-                    />
-                    <span className='truncate flex-1'>{name}</span>
-                    <ChevronRight
-                      size={18}
-                      aria-hidden='true'
-                      className={`shrink-0 mr-0.5 text-orange-500 drop-shadow-[0_0_6px_#f97316] ${
-                        isActive ? 'animate-nav-arrow' : 'opacity-0'
-                      }`}
-                    />
-                  </>
-                )}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      <div className='shrink-0 border-t border-gray-100 px-3 py-3 space-y-1.5'>
-        <div className='flex items-center gap-3 px-3 py-2.5 rounded-lg bg-gray-50'>
-          <div className='shrink-0 w-9 h-9 rounded-full bg-linear-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white text-base font-bold select-none'>
-            M
-          </div>
-          <div className='min-w-0 flex-1'>
-            <p className='text-base font-semibold text-gray-900 leading-snug truncate'>
-              {user?.name || 'Admin'}
-            </p>
-            <p className='text-sm text-gray-400 leading-snug truncate'>
-              {user?.email || ''}
-            </p>
-          </div>
-        </div>
-
-        <button
-          type='button'
-          onClick={handleLogout}
-          className={`${NAV_BASE} w-full text-gray-600 border-transparent hover:bg-red-50 hover:text-red-600 hover:shadow-[inset_3px_0_0_0_#ef4444]`}
-        >
-          <LogOut
-            size={20}
-            aria-hidden='true'
-            className='shrink-0 text-gray-400 group-hover:text-red-500 transition-colors'
-          />
-          <span>Sign Out</span>
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default Sidebar;
+ 
