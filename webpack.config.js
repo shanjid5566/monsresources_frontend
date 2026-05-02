@@ -111,13 +111,15 @@ module.exports = (env, argv) => {
       runtimeChunk: 'single',
     },
     devServer: {
+      host: '0.0.0.0',       // Required for Docker/Coolify
+      allowedHosts: 'all',   // Required to prevent proxy host header errors
       static: {
         directory: path.join(__dirname, 'public'),
       },
       historyApiFallback: true,
       port: devPort,
       hot: true,
-      open: true,
+      open: false,           // Disabled for Docker environment
       compress: true,
       // Proxy /api/* → backend so browser never sees a CORS error in dev
       proxy: {

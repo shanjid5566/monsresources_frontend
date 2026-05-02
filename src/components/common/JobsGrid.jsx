@@ -1,7 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { MapPin, Clock } from 'lucide-react'
 
 const JobsGrid = ({ jobs = [] }) => {
+  const navigate = useNavigate()
+
+  const handleViewDetails = (jobId) => {
+    navigate(`/jobs/${jobId}`)
+  }
+
   return (
     <div className="space-y-4">
       {jobs.map((job) => (
@@ -54,7 +61,10 @@ const JobsGrid = ({ jobs = [] }) => {
             </div>
 
             {/* Button */}
-            <button className="w-full px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer">
+            <button 
+              onClick={() => handleViewDetails(job.id)}
+              className="w-full px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer"
+            >
               View Details
             </button>
           </div>
@@ -105,7 +115,10 @@ const JobsGrid = ({ jobs = [] }) => {
                     Published {job.postedDaysAgo}
                   </span>
                 </div>
-                <button className="px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer whitespace-nowrap">
+                <button 
+                  onClick={() => handleViewDetails(job.id)}
+                  className="px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer whitespace-nowrap"
+                >
                   View Details
                 </button>
               </div>
