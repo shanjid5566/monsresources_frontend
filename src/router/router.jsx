@@ -32,6 +32,7 @@ const Register = lazy(() => import('../pages/authentication/Register'));
 const ForgotPassword = lazy(() => import('../pages/authentication/ForgotPassword'));
 const Otp = lazy(() => import('../pages/authentication/Otp'));
 const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
+const JobListing = lazy(() => import('../pages/admin/JobListing'));
 
 const PageLoader = () => (
   <div className='flex items-center justify-center min-h-screen'>
@@ -89,6 +90,20 @@ const router = createBrowserRouter(
         }
       >
         <Route path={'/admin/dashboard'} element={<Dashboard />} />
+        <Route path={'/admin/jobs'} element={<JobListing />} />
+      </Route>
+
+      <Route
+        path={'/user'}
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          </Suspense>
+        }
+      >
+        <Route path={'/user/jobs'} element={<JobListing />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />

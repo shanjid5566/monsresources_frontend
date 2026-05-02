@@ -2,11 +2,21 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MapPin, Clock } from 'lucide-react'
 
-const JobsGrid = ({ jobs = [] }) => {
+const JobsGrid = ({ jobs = [], isFromDashboard = false }) => {
   const navigate = useNavigate()
 
   const handleViewDetails = (jobId) => {
     navigate(`/jobs/${jobId}`)
+  }
+
+  const handleEdit = (jobId) => {
+    // Handle edit functionality
+    console.log('Edit job:', jobId)
+  }
+
+  const handleDelete = (jobId) => {
+    // Handle delete functionality
+    console.log('Delete job:', jobId)
   }
 
   return (
@@ -61,12 +71,35 @@ const JobsGrid = ({ jobs = [] }) => {
             </div>
 
             {/* Button */}
-            <button 
-              onClick={() => handleViewDetails(job.id)}
-              className="w-full px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer"
-            >
-              View Details
-            </button>
+            {isFromDashboard ? (
+              <div className="flex gap-2 flex-wrap">
+                <button 
+                  onClick={() => handleEdit(job.id)}
+                  className="flex-1 px-4 py-2 bg-[#D85A00] text-white font-semibold rounded hover:opacity-90 transition-opacity cursor-pointer text-sm"
+                >
+                  Edit
+                </button>
+                <button 
+                  onClick={() => handleDelete(job.id)}
+                  className="flex-1 px-4 py-2 bg-[#DD0303] text-white font-semibold rounded hover:opacity-90 transition-opacity cursor-pointer text-sm"
+                >
+                  Delete
+                </button>
+                <button 
+                  onClick={() => handleViewDetails(job.id)}
+                  className="flex-1 px-4 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer text-sm"
+                >
+                  View Details
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={() => handleViewDetails(job.id)}
+                className="w-full px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer"
+              >
+                View Details
+              </button>
+            )}
           </div>
 
           {/* Desktop Layout */}
@@ -115,12 +148,36 @@ const JobsGrid = ({ jobs = [] }) => {
                     Published {job.postedDaysAgo}
                   </span>
                 </div>
-                <button 
-                  onClick={() => handleViewDetails(job.id)}
-                  className="px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer whitespace-nowrap"
-                >
-                  View Details
-                </button>
+                
+                {isFromDashboard ? (
+                  <div className="flex gap-3">
+                    <button 
+                      onClick={() => handleEdit(job.id)}
+                      className="px-6 py-2 bg-[#D85A00] text-white font-semibold rounded hover:opacity-90 transition-opacity cursor-pointer whitespace-nowrap"
+                    >
+                      Edit
+                    </button>
+                    <button 
+                      onClick={() => handleDelete(job.id)}
+                      className="px-6 py-2 bg-[#DD0303] text-white font-semibold rounded hover:opacity-90 transition-opacity cursor-pointer whitespace-nowrap"
+                    >
+                      Delete
+                    </button>
+                    <button 
+                      onClick={() => handleViewDetails(job.id)}
+                      className="px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer whitespace-nowrap"
+                    >
+                      View Details
+                    </button>
+                  </div>
+                ) : (
+                  <button 
+                    onClick={() => handleViewDetails(job.id)}
+                    className="px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer whitespace-nowrap"
+                  >
+                    View Details
+                  </button>
+                )}
               </div>
             </div>
           </div>

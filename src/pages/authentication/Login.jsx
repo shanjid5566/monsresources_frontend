@@ -79,7 +79,13 @@ const Login = () => {
             token: `demo-token-${Date.now()}`,
           })
         );
-        navigate(ROUTES.ADMIN_DASHBOARD);
+        
+        // Redirect based on role
+        if (userRole === 'user') {
+          navigate('/user/jobs');
+        } else {
+          navigate(ROUTES.ADMIN_DASHBOARD);
+        }
       }, 1000);
     } catch (error) {
       console.error('Login error:', error);
@@ -234,7 +240,7 @@ const Login = () => {
                 }}
                 className="w-full px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors cursor-pointer"
               >
-                <div className="font-medium">HR Manager Login</div>
+                <div className="font-medium">employee Login</div>
                 <div className="text-xs">hr@test.com</div>
               </button>
 

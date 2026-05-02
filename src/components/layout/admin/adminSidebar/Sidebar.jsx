@@ -18,9 +18,10 @@ const MENU_ITEMS = {
     { icon: Settings, label: 'Settings', href: '/admin/settings' },
   ],
   user: [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
-    { icon: Briefcase, label: 'My Applications', href: '/admin/applications' },
-    { icon: Settings, label: 'Settings', href: '/admin/settings' },
+    { icon: Briefcase, label: 'Job Listing', href: '/user/jobs' },
+    { icon: Briefcase, label: 'Applied Job', href: '/user/applications' },
+    { icon: Briefcase, label: 'Saved Job', href: '/user/saved' },
+    { icon: Settings, label: 'Account', href: '/user/settings' },
   ],
 };
 
