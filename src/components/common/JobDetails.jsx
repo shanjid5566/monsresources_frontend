@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   MapPin,
@@ -17,6 +17,7 @@ import {
   Building2,
 } from "lucide-react";
 import { getJobById } from "../../data/jobsData";
+import ApplyModal from "./ApplyModal";
 
 // Icon renderer helper
 const getIcon = (iconName) => {
@@ -37,6 +38,7 @@ const getIcon = (iconName) => {
 const JobDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const job = getJobById(id);
 
@@ -215,7 +217,10 @@ const JobDetails = () => {
               <p className="text-[#484849] mb-6 text-sm">
                 By applying, you agree to our Terms and Privacy Policy.
               </p>
-              <button className="w-full px-6 py-3 bg-[#D3C085] text-[#0B0B0B] font-semibold rounded hover:bg-[#c4b176] transition-colors mb-3 cursor-pointer">
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="w-full px-6 py-3 bg-[#D3C085] text-[#0B0B0B] font-semibold rounded hover:bg-[#c4b176] transition-colors mb-3 cursor-pointer"
+              >
                 Apply Now
               </button>
               <button className="w-full px-6 py-3 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer">
@@ -243,6 +248,13 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
+
+      <ApplyModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)}
+        jobTitle={job.title}
+        company={job.company}
+      />
     </div>
   );
 };
