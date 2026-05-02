@@ -15,6 +15,7 @@ import FindJobs from '../pages/public/find_jobs/FindJobs';
 import JobDetails from '../components/common/JobDetails';
 
 const Login = lazy(() => import('../pages/authentication/Login'));
+const ForgotPassword = lazy(() => import('../pages/authentication/ForgotPassword'));
 const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
 
 const PageLoader = () => (
@@ -57,6 +58,7 @@ const router = createBrowserRouter(
         <Route path={'/jobs/:id'} element={<JobDetails />} />
       </Route>
         <Route path={'/login'} element={<Login />} />
+        <Route path={'/forgot-password'} element={<ForgotPassword />} />
 
       <Route
         path={'/admin'}

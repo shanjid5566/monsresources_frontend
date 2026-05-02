@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../store/slices/authSlice';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 const ROUTES = {
   HOME: '/',
@@ -75,6 +75,18 @@ const Login = () => {
       {/* Right Side - Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-8 bg-[#F9F7F3]">
         <div className="w-full max-w-md">
+          {/* Back Button */}
+          <div>
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 border border-[#063D2E] text-[#063D2E] rounded hover:bg-[#F0EFEA] cursor-pointer"
+              aria-label="Go back"
+            >
+              <ArrowLeft size={16} />
+              <span>Back</span>
+            </button>
+          </div>
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-[#000000] mb-2">
@@ -139,11 +151,11 @@ const Login = () => {
             {/* Forgot Password */}
             <div className="text-right">
               <Link
-                to="#"
-                className="text-sm font-semibold text-[#063D2E] hover:underline"
-              >
-                Forgot Password?
-              </Link>
+                  to="/forgot-password"
+                  className="text-sm font-semibold text-[#063D2E] hover:underline"
+                >
+                  Forgot Password?
+                </Link>
             </div>
 
             {/* Sign In Button */}
