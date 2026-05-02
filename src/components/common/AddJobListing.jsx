@@ -114,8 +114,8 @@ export default function AddJobListing() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f4f0] text-slate-800 p-4 md:p-8 font-sans selection:bg-teal-200">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen">
+      <div className="mx-auto">
         
         {/* Header Section */}
         <div className="mb-8 flex items-center gap-4">
@@ -291,7 +291,7 @@ export default function AddJobListing() {
                     name="shortDescription"
                     value={formData.shortDescription}
                     onChange={handleChange}
-                    rows="2"
+                    rows="4"
                     className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="Brief summary of the role..."
                   ></textarea>
@@ -303,7 +303,7 @@ export default function AddJobListing() {
                     name="aboutRole"
                     value={formData.aboutRole}
                     onChange={handleChange}
-                    rows="3"
+                    rows="5"
                     className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="Tell us about the role expectations..."
                   ></textarea>
@@ -315,7 +315,7 @@ export default function AddJobListing() {
                     name="responsibilities"
                     value={formData.responsibilities}
                     onChange={handleChange}
-                    rows="4"
+                    rows="6"
                     className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="List the main responsibilities..."
                   ></textarea>
@@ -327,7 +327,7 @@ export default function AddJobListing() {
                     name="requirements"
                     value={formData.requirements}
                     onChange={handleChange}
-                    rows="4"
+                    rows="6"
                     className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="List the job requirements..."
                   ></textarea>
@@ -339,7 +339,7 @@ export default function AddJobListing() {
                     name="benefits"
                     value={formData.benefits}
                     onChange={handleChange}
-                    rows="4"
+                    rows="6"
                     className="w-full px-4 py-3 bg-[#f8f9fa] border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all resize-none"
                     placeholder="List the benefits and perks..."
                   ></textarea>
@@ -459,7 +459,7 @@ export default function AddJobListing() {
             {/* Submit Button */}
             <button 
               onClick={handlePostJob}
-              className="w-full bg-[#0a4d3c] text-white font-medium py-3.5 rounded-xl shadow-md hover:bg-[#083a2d] transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 mt-2"
+              className="w-full bg-[#063D2E] text-white font-medium py-3.5 rounded-xl shadow-md hover:bg-[#083a2d] transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 mt-2"
             >
               Post Now
             </button>
