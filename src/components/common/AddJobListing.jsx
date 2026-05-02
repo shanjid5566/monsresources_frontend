@@ -118,13 +118,14 @@ export default function AddJobListing() {
       <div className="mx-auto">
         
         {/* Header Section */}
-        <div className="mb-8 flex items-center gap-4">
+        <div className="mb-8">
           <button 
             onClick={() => navigate(-1)}
-            className="p-2 hover:bg-white rounded-lg transition-colors"
+            className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg transition-colors mb-4 cursor-pointer"
             title="Go back"
           >
             <ArrowLeft className="w-5 h-5 text-slate-600" />
+            <span className="text-slate-600 font-medium">Back</span>
           </button>
           <div>
             <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Create a New Job Post</h1>
