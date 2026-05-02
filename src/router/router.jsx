@@ -12,7 +12,7 @@ import AdminLayout from '../components/layout/admin/Layout';
 import { selectIsAuthenticated } from '../store/slices/authSlice';
 import Home from '../pages/public/home/Home';
 import FindJobs from '../pages/public/find_jobs/FindJobs';
-import JobDetails from '../pages/public/job_details/JobDetails';
+import JobDetails from '../components/common/JobDetails';
 
 const Login = lazy(() => import('../pages/Login'));
 const Dashboard = lazy(() => import('../pages/admin/Dashboard'));

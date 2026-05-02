@@ -16,7 +16,7 @@ import {
   Cpu,
   Building2,
 } from "lucide-react";
-import { getJobById } from "../../../data/jobsData";
+import { getJobById } from "../../data/jobsData";
 
 // Icon renderer helper
 const getIcon = (iconName) => {
