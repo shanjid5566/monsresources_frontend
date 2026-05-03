@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   MapPin,
   Clock,
@@ -43,6 +44,7 @@ const JobDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const user = useSelector((state) => state.auth.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [applicantStates, setApplicantStates] = useState({});
@@ -285,7 +287,7 @@ const JobDetails = () => {
         logo={job.logo}
       />
 
-      {/* Applicant List Section */}
+      {/* Applicant List Section - Only visible if coming from Dashboard and jobs-listing page */}
       {isFromDashboard && (
         <div className="mt-12 mb-12">
           <div className="container mx-auto px-4 sm:px-6">
@@ -354,8 +356,9 @@ const JobDetails = () => {
         Dropdown rendered here — completely OUTSIDE the table and overflow-x-auto container.
         Uses position:fixed with coordinates from getBoundingClientRect() so it can never
         be clipped, and automatically opens upward when near the bottom of the viewport.
+        Only visible if coming from Dashboard and jobs-listing page
       */}
-      {openDropdownId !== null && (
+      {isFromDashboard && openDropdownId !== null && (
         <div
           onMouseDown={(e) => e.stopPropagation()}
           style={{
