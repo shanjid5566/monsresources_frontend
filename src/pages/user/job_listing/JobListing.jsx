@@ -12,7 +12,7 @@ const JobListing = () => {
 
 
   const handleAddJob = () => {
-    navigate('/user/jobs/add');
+    navigate('/user/jobs-listing/add');
   };
 
   return (

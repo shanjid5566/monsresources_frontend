@@ -106,8 +106,8 @@ const router = createBrowserRouter(
           </Suspense>
         }
       >
-        <Route path={'/user/jobs'} element={<UserJobListing />} />
-        <Route path={'/user/jobs/add'} element={<AddJobListing />} />
+        <Route path={'/user/jobs-listing'} element={<UserJobListing />} />
+        <Route path={'/user/jobs-listing/add'} element={<AddJobListing />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />

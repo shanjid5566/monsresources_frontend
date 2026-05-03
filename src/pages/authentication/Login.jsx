@@ -82,7 +82,7 @@ const Login = () => {
         
         // Redirect based on role
         if (userRole === 'user') {
-          navigate('/user/jobs');
+          navigate('/user/jobs-listing');
         } else {
           navigate(ROUTES.ADMIN_DASHBOARD);
         }

@@ -18,7 +18,7 @@ const MENU_ITEMS = {
     { icon: Settings, label: 'Settings', href: '/admin/settings' },
   ],
   user: [
-    { icon: Briefcase, label: 'Job Listing', href: '/user/jobs' },
+    { icon: Briefcase, label: 'Job Listing', href: '/user/jobs-listing' },
     { icon: Briefcase, label: 'Applied Job', href: '/user/applications' },
     { icon: Briefcase, label: 'Saved Job', href: '/user/saved' },
     { icon: Settings, label: 'Account', href: '/user/settings' },
