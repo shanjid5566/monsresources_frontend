@@ -25,6 +25,7 @@ const ROUTES = {
   ADMIN: '/admin',
   ADMIN_DASHBOARD: '/admin/dashboard',
   FIND_JOBS: '/find-jobs',
+  APPLICANT_DETAILS: '/applicant/:applicantId',
 };
 
 const Login = lazy(() => import('../pages/authentication/Login'));
@@ -35,6 +36,7 @@ const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
 const JobListing = lazy(() => import('../pages/admin/job_listing/JobListing'));
 const AddJobListing = lazy(() => import('../components/common/AddJobListing'));
 const UserJobListing = lazy(() => import('../pages/user/job_listing/JobListing'));
+const ApplicantDetails = lazy(() => import('../pages/public/ApplicantDetails'));
 
 const PageLoader = () => (
   <div className='flex items-center justify-center min-h-screen'>
@@ -80,6 +82,18 @@ const router = createBrowserRouter(
         <Route path={'/forgot-password'} element={<ForgotPassword />} />
         <Route path={'/otp'} element={<Otp />} />
         <Route path={'/reset-password'} element={<ResetPassword />} />
+
+      {/* Protected Applicant Details Route */}
+      <Route
+        path={'/applicant/:applicantId'}
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <ProtectedRoute>
+              <ApplicantDetails />
+            </ProtectedRoute>
+          </Suspense>
+        }
+      />
 
       <Route
         path={'/admin'}

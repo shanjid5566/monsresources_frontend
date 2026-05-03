@@ -106,7 +106,7 @@ const JobDetails = () => {
   };
 
   const handleViewApplicantDetails = (applicant) => {
-    console.log("View details for:", applicant);
+    navigate(`/applicant/${applicant.id}`);
   };
 
   // Key fix: use position:fixed so overflow-x-auto cannot clip the dropdown.
