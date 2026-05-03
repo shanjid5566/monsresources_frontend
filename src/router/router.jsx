@@ -27,6 +27,7 @@ const ROUTES = {
   FIND_JOBS: '/find-jobs',
   APPLICANT_DETAILS: '/applicant/:applicantId',
   APPLIED_JOB: '/user/applications',
+  SAVED_JOB: '/user/saved',
 };
 
 const Login = lazy(() => import('../pages/authentication/Login'));
@@ -39,6 +40,7 @@ const AddJobListing = lazy(() => import('../components/common/AddJobListing'));
 const UserJobListing = lazy(() => import('../pages/user/job_listing/JobListing'));
 const ApplicantDetails = lazy(() => import('../pages/public/ApplicantDetails'));
 const AppliedJob = lazy(() => import('../pages/user/applied_job/AppliedJob'));
+const SavedJob = lazy(() => import('../pages/user/saved_job/SavedJob'));
 
 const PageLoader = () => (
   <div className='flex items-center justify-center min-h-screen'>
@@ -125,6 +127,7 @@ const router = createBrowserRouter(
         <Route path={'/user/jobs-listing'} element={<UserJobListing />} />
         <Route path={'/user/jobs-listing/add'} element={<AddJobListing />} />
         <Route path={'/user/applications'} element={<AppliedJob />} />
+        <Route path={'/user/saved'} element={<SavedJob />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />
