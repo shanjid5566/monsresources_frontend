@@ -43,7 +43,7 @@ const AppliedJob = () => {
   ]);
 
   const handleViewPosting = (jobId) => {
-    navigate(`/jobs/${jobId}`);
+    navigate(`/jobs/${jobId}`, { state: { fromAppliedJobs: true } });
   };
 
   return (
@@ -113,11 +113,11 @@ const AppliedJob = () => {
                         </div>
                       </div>
 
-                      {/* Confirmation ID */}
+                      {/* Applied Date */}
                       <div className="flex items-center gap-2 text-sm">
                         <CheckCircle2 size={16} className="text-[#063D2E]" />
                         <span className="text-[#484849]">
-                          Confirmation: <span className="font-semibold">{job.confirmationId}</span>
+                          Applied on: <span className="font-semibold">{job.appliedDate}</span>
                         </span>
                       </div>
                     </div>

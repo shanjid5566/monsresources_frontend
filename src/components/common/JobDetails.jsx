@@ -53,6 +53,8 @@ const JobDetails = () => {
   const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 });
 
   const isFromDashboard = location.state?.fromDashboard === true;
+  const isFromAppliedJobs = location.state?.fromAppliedJobs === true;
+  const shouldHideApplySection = isFromDashboard || isFromAppliedJobs;
 
   // Handle click outside to close dropdown
   useEffect(() => {
@@ -249,19 +251,22 @@ const JobDetails = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6 sticky top-30 self-start">
-            <div className="bg-[#EBE5D9] rounded-lg p-6">
-              <h3 className="text-xl font-bold text-[#0B0B0B] mb-4">Ready to Apply?</h3>
-              <p className="text-[#484849] mb-6 text-sm">By applying, you agree to our Terms and Privacy Policy.</p>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="w-full px-6 py-3 bg-[#D3C085] text-[#0B0B0B] font-semibold rounded hover:bg-[#c4b176] transition-colors mb-3 cursor-pointer"
-              >
-                Apply Now
-              </button>
-              <button className="w-full px-6 py-3 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer">
-                Save Job
-              </button>
-            </div>
+            {/* Ready to Apply Section - Only visible when NOT coming from Dashboard or Applied Jobs page */}
+            {!shouldHideApplySection && (
+              <div className="bg-[#EBE5D9] rounded-lg p-6">
+                <h3 className="text-xl font-bold text-[#0B0B0B] mb-4">Ready to Apply?</h3>
+                <p className="text-[#484849] mb-6 text-sm">By applying, you agree to our Terms and Privacy Policy.</p>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full px-6 py-3 bg-[#D3C085] text-[#0B0B0B] font-semibold rounded hover:bg-[#c4b176] transition-colors mb-3 cursor-pointer"
+                >
+                  Apply Now
+                </button>
+                <button className="w-full px-6 py-3 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer">
+                  Save Job
+                </button>
+              </div>
+            )}
             <div className="bg-[#EBE5D9] rounded-lg p-6">
               <h3 className="text-lg font-bold text-[#0B0B0B] mb-4">About {job.company}</h3>
               <div className="flex flex-col gap-3 text-sm text-[#484849]">

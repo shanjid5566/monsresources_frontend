@@ -38,7 +38,7 @@ const JobListing = lazy(() => import('../pages/admin/job_listing/JobListing'));
 const AddJobListing = lazy(() => import('../components/common/AddJobListing'));
 const UserJobListing = lazy(() => import('../pages/user/job_listing/JobListing'));
 const ApplicantDetails = lazy(() => import('../pages/public/ApplicantDetails'));
-const AppliedJob = lazy(() => import('../pages/user/AppliedJob'));
+const AppliedJob = lazy(() => import('../pages/user/applied_job/AppliedJob'));
 
 const PageLoader = () => (
   <div className='flex items-center justify-center min-h-screen'>
