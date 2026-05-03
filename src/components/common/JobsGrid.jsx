@@ -2,12 +2,14 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MapPin, Clock } from 'lucide-react'
 
-const JobsGrid = ({ jobs = [], isFromDashboard = false }) => {
+const JobsGrid = ({ jobs = [], isFromDashboard = false, isFromAppliedJobs = false }) => {
   const navigate = useNavigate()
 
   const handleViewDetails = (jobId) => {
     if (isFromDashboard) {
       navigate(`/jobs/${jobId}`, { state: { fromDashboard: true } })
+    } else if (isFromAppliedJobs) {
+      navigate(`/jobs/${jobId}`, { state: { fromAppliedJobs: true } })
     } else {
       navigate(`/jobs/${jobId}`)
     }
@@ -96,6 +98,13 @@ const JobsGrid = ({ jobs = [], isFromDashboard = false }) => {
                   View Details
                 </button>
               </div>
+            ) : isFromAppliedJobs ? (
+              <button 
+                onClick={() => handleViewDetails(job.id)}
+                className="w-full px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer text-sm"
+              >
+                View Posting
+              </button>
             ) : (
               <button 
                 onClick={() => handleViewDetails(job.id)}
@@ -174,6 +183,13 @@ const JobsGrid = ({ jobs = [], isFromDashboard = false }) => {
                       View Details
                     </button>
                   </div>
+                ) : isFromAppliedJobs ? (
+                  <button 
+                    onClick={() => handleViewDetails(job.id)}
+                    className="px-6 py-2 bg-[#063D2E] text-white font-semibold rounded hover:bg-[#052d24] transition-colors cursor-pointer whitespace-nowrap text-sm"
+                  >
+                    View Posting
+                  </button>
                 ) : (
                   <button 
                     onClick={() => handleViewDetails(job.id)}
