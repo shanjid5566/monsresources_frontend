@@ -41,6 +41,7 @@ const UserJobListing = lazy(() => import('../pages/user/job_listing/JobListing')
 const ApplicantDetails = lazy(() => import('../pages/public/ApplicantDetails'));
 const AppliedJob = lazy(() => import('../pages/user/applied_job/AppliedJob'));
 const SavedJob = lazy(() => import('../pages/user/saved_job/SavedJob'));
+const Account = lazy(() => import('../pages/user/account/Account'));
 
 const PageLoader = () => (
   <div className='flex items-center justify-center min-h-screen'>
@@ -128,6 +129,7 @@ const router = createBrowserRouter(
         <Route path={'/user/jobs-listing/add'} element={<AddJobListing />} />
         <Route path={'/user/applications'} element={<AppliedJob />} />
         <Route path={'/user/saved'} element={<SavedJob />} />
+        <Route path={'/user/settings'} element={<Account />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />
