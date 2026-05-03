@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Sidebar from './adminSidebar/Sidebar';
 import DashboardHeader from './DashboardHeader';
 
 const Layout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mainContentRef = useRef(null);
+  const location = useLocation();
+
+  // Scroll to top when route changes
+  useEffect(() => {
+    if (mainContentRef.current) {
+      mainContentRef.current.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -40,7 +49,7 @@ const Layout = () => {
       {/* Main Content */}
       <div className='flex-1 flex flex-col overflow-hidden'>
         <DashboardHeader onMenuToggle={toggleMobileMenu} isMobileMenuOpen={isMobileMenuOpen} />
-        <main className='flex-1 overflow-auto bg-[#FBF9F3]'>
+        <main ref={mainContentRef} className='flex-1 overflow-auto bg-[#FBF9F3]'>
           <div className='p-4 md:p-8'>
             <Outlet />
           </div>
