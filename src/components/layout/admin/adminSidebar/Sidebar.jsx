@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Briefcase, Users, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, Briefcase,ClipboardCheck ,Bookmark , Users, Settings, LogOut } from 'lucide-react';
 import { logout } from '../../../../store/slices/authSlice';
 
 const MENU_ITEMS = {
@@ -19,8 +19,8 @@ const MENU_ITEMS = {
   ],
   user: [
     { icon: Briefcase, label: 'Job Listing', href: '/user/jobs-listing' },
-    { icon: Briefcase, label: 'Applied Job', href: '/user/applications' },
-    { icon: Briefcase, label: 'Saved Job', href: '/user/saved' },
+    { icon: ClipboardCheck , label: 'Applied Job', href: '/user/applications' },
+    { icon: Bookmark , label: 'Saved Job', href: '/user/saved' },
     { icon: Settings, label: 'Account', href: '/user/settings' },
   ],
 };
