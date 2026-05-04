@@ -43,6 +43,7 @@ const AppliedJob = lazy(() => import('../pages/user/applied_job/AppliedJob'));
 const SavedJob = lazy(() => import('../pages/user/saved_job/SavedJob'));
 const Account = lazy(() => import('../pages/user/account/Account'));
 const HRDashboardOverview = lazy(() => import('../pages/hr/dashboard/DashboardOverview'));
+const HRJobPosting = lazy(() => import('../pages/hr/job_posting/JobPosting'));
 
 const PageLoader = () => (
   <div className='flex items-center justify-center min-h-screen'>
@@ -144,6 +145,7 @@ const router = createBrowserRouter(
         }
       >
         <Route path={'/hr/dashboard'} element={<HRDashboardOverview />} />
+        <Route path={'/hr/jobs-listing'} element={<HRJobPosting />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />
