@@ -35,7 +35,7 @@ const Login = lazy(() => import('../pages/authentication/Login'));
 const Register = lazy(() => import('../pages/authentication/Register'));
 const ForgotPassword = lazy(() => import('../pages/authentication/ForgotPassword'));
 const Otp = lazy(() => import('../pages/authentication/Otp'));
-const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
+const AdminDashboard = lazy(() => import('../pages/admin/dashboard_overview/DashboardOverview'));
 const JobListing = lazy(() => import('../pages/admin/job_listing/JobListing'));
 const AddJobListing = lazy(() => import('../components/common/jobs/AddJobListing'));
 const UserJobListing = lazy(() => import('../pages/user/job_listing/JobListing'));
@@ -113,7 +113,7 @@ const router = createBrowserRouter(
           </Suspense>
         }
       >
-        <Route path={'/admin/dashboard'} element={<Dashboard />} />
+        <Route path={'/admin/dashboard'} element={<AdminDashboard />} />
         <Route path={'/admin/jobs'} element={<JobListing />} />
         <Route path={'/admin/jobs/add'} element={<AddJobListing />} />
       </Route>
