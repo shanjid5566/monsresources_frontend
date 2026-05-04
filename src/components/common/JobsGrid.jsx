@@ -17,9 +17,9 @@ const JobsGrid = ({ jobs = [], isFromDashboard = false, isFromAppliedJobs = fals
     }
   }
 
-  const handleEdit = (jobId) => {
-    // Handle edit functionality
-    console.log('Edit job:', jobId)
+  const handleEdit = (job) => {
+    // Navigate to AddJobListing page with job data
+    navigate('/hr/jobs/add', { state: { jobToEdit: job } })
   }
 
   const handleDelete = (jobId) => {
@@ -82,7 +82,7 @@ const JobsGrid = ({ jobs = [], isFromDashboard = false, isFromAppliedJobs = fals
             {isFromDashboard ? (
               <div className="flex gap-2 flex-wrap">
                 <button 
-                  onClick={() => handleEdit(job.id)}
+                  onClick={() => handleEdit(job)}
                   className="flex-1 px-4 py-2 bg-[#D85A00] text-white font-semibold rounded hover:opacity-90 transition-opacity cursor-pointer text-sm"
                 >
                   Edit
@@ -174,7 +174,7 @@ const JobsGrid = ({ jobs = [], isFromDashboard = false, isFromAppliedJobs = fals
                 {isFromDashboard ? (
                   <div className="flex gap-3">
                     <button 
-                      onClick={() => handleEdit(job.id)}
+                      onClick={() => handleEdit(job)}
                       className="px-6 py-2 bg-[#D85A00] text-white font-semibold rounded hover:opacity-90 transition-opacity cursor-pointer whitespace-nowrap"
                     >
                       Edit

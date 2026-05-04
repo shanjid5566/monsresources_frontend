@@ -638,7 +638,7 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   MapPin, 
   Briefcase, 
@@ -651,10 +651,12 @@ import {
   Camera,
   ArrowLeft
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function AddJobListing() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const jobToEdit = location.state?.jobToEdit;
 
   // State for storing form data
   const [formData, setFormData] = useState({
@@ -674,6 +676,29 @@ export default function AddJobListing() {
     deadline: '',
     email: ''
   });
+
+  // Pre-populate form with job data if editing
+  useEffect(() => {
+    if (jobToEdit) {
+      setFormData({
+        jobTitle: jobToEdit.title || '',
+        companyName: jobToEdit.company || '',
+        logo: jobToEdit.logo || null,
+        location: jobToEdit.location || '',
+        salary: jobToEdit.salary || '',
+        jobType: jobToEdit.type || 'Full-time',
+        experience: jobToEdit.experience || 'Junior',
+        category: jobToEdit.category || 'Engineering',
+        shortDescription: jobToEdit.description || '',
+        aboutRole: jobToEdit.aboutRole || '',
+        responsibilities: jobToEdit.responsibilities || '',
+        requirements: jobToEdit.requirements || '',
+        benefits: jobToEdit.benefits || '',
+        deadline: jobToEdit.deadline || '',
+        email: jobToEdit.email || ''
+      });
+    }
+  }, [jobToEdit]);
 
   // Standard requirements based on the Applicant Details page (Separated Social Links)
   const [standardRequirements, setStandardRequirements] = useState({
@@ -718,8 +743,22 @@ export default function AddJobListing() {
     }));
   };
 
+  // Helper function to safely get text from item (could be string or object)
+  const getItemText = (item) => {
+    if (!item) return '';
+    if (typeof item === 'string') return item;
+    if (typeof item === 'object' && item.title) return item.title;
+    if (typeof item === 'object' && item.description) return item.description;
+    if (typeof item === 'object') return JSON.stringify(item);
+    return String(item);
+  };
+
   // Helper function to convert list item strings to an array
   const parseList = (text) => {
+    // Handle cases where text might be an array, null, or undefined
+    if (!text) return [];
+    if (Array.isArray(text)) return text;
+    if (typeof text !== 'string') return [];
     return text.split('\n').filter(item => item.trim() !== '');
   };
 
@@ -729,7 +768,12 @@ export default function AddJobListing() {
         jobDetails: formData,
         applicationRequirements: standardRequirements
     };
-    console.log('Job posted successfully:', jobPayload);
+    
+    if (jobToEdit) {
+      console.log('Job updated successfully:', jobPayload);
+    } else {
+      console.log('Job posted successfully:', jobPayload);
+    }
     navigate(-1); // Go back to previous page
   };
 
@@ -748,8 +792,12 @@ export default function AddJobListing() {
             <span className="text-slate-600 font-medium">Back</span>
           </button>
           <div>
-            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Create a New Job Post</h1>
-            <p className="text-slate-500 mt-2">Fill out the form below and view the live preview on the right.</p>
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              {jobToEdit ? 'Edit Job Post' : 'Create a New Job Post'}
+            </h1>
+            <p className="text-slate-500 mt-2">
+              {jobToEdit ? 'Update the job details below.' : 'Fill out the form below and view the live preview on the right.'}
+            </p>
           </div>
         </div>
 
@@ -1039,7 +1087,7 @@ export default function AddJobListing() {
               onClick={handlePostJob}
               className="w-full bg-[#063D2E] text-white font-medium py-3.5 rounded-xl shadow-md hover:bg-[#083a2d] transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 mt-2"
             >
-              Post Now
+              {jobToEdit ? 'Update Job' : 'Post Now'}
             </button>
           </div>
 
@@ -1137,7 +1185,7 @@ export default function AddJobListing() {
                         {parseList(formData.responsibilities).map((item, index) => (
                           <li key={index} className="flex items-start gap-3">
                             <CheckCircle2 className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
-                            <span className="text-slate-700 leading-relaxed">{item}</span>
+                            <span className="text-slate-700 leading-relaxed">{getItemText(item)}</span>
                           </li>
                         ))}
                         {!formData.responsibilities && <p className="text-slate-500 italic">Responsibilities will be listed here...</p>}
@@ -1150,7 +1198,7 @@ export default function AddJobListing() {
                       <ul className="space-y-2 list-disc list-outside ml-5">
                         {parseList(formData.requirements).map((item, index) => (
                           <li key={index} className="text-slate-700 leading-relaxed pl-1">
-                            {item}
+                            {getItemText(item)}
                           </li>
                         ))}
                         {!formData.requirements && <p className="text-slate-500 italic list-none -ml-5">Requirements will be listed here...</p>}
@@ -1166,7 +1214,7 @@ export default function AddJobListing() {
                             <div className="w-4 h-4 rounded-full border border-slate-500 flex items-center justify-center flex-shrink-0">
                               <div className="w-1.5 h-1.5 bg-slate-700 rounded-full"></div>
                             </div>
-                            <span className="text-slate-800 font-medium text-sm leading-snug">{item}</span>
+                            <span className="text-slate-800 font-medium text-sm leading-snug">{getItemText(item)}</span>
                           </div>
                         ))}
                         {!formData.benefits && <p className="text-slate-500 italic col-span-2">Benefits will be listed here...</p>}
