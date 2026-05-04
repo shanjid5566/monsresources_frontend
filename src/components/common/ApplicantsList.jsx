@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Eye, ChevronDown } from "lucide-react";
 import Pagination from "./Pagination";
 
-const ApplicantsList = ({ applicants: initialApplicants = [], heading = "Applicant list", itemsPerPage = 10 }) => {
+const ApplicantsList = ({ applicants: initialApplicants = [], heading = "Applicant list", itemsPerPage = 10, useContainer = true }) => {
   const navigate = useNavigate();
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [applicantStates, setApplicantStates] = useState({});
@@ -90,12 +90,13 @@ const ApplicantsList = ({ applicants: initialApplicants = [], heading = "Applica
 
   return (
     <div className="mt-12 mb-12">
-      <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#0B0B0B] mb-6">
-          {heading}
-        </h2>
+      {useContainer ? (
+        <div className="container mx-auto px-4 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#0B0B0B] mb-6">
+            {heading}
+          </h2>
 
-        <div className="overflow-x-auto rounded-lg shadow">
+          <div className="overflow-x-auto rounded-lg shadow">
           <table className="w-full">
             <thead>
               <tr className="bg-[#D3C085]">
@@ -182,15 +183,118 @@ const ApplicantsList = ({ applicants: initialApplicants = [], heading = "Applica
               ))}
             </tbody>
           </table>
-        </div>
+            </div>
 
-        {/* Pagination */}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
-      </div>
+            {/* Pagination */}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+      ) : (
+        <>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#0B0B0B] mb-6">
+            {heading}
+          </h2>
+
+          <div className="overflow-x-auto rounded-lg shadow">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-[#D3C085]">
+                  <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">
+                    Name
+                  </th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">
+                    Location
+                  </th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">
+                    Phone Number
+                  </th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">
+                    Applied Date
+                  </th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">
+                    Status
+                  </th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">
+                    Email
+                  </th>
+                  <th className="px-4 sm:px-6 py-3 text-center text-sm font-semibold text-[#0B0B0B]">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedApplicants.map((applicant) => (
+                  <tr
+                    key={applicant.id}
+                    className="bg-[#E6E1D6] border-b border-[#D3C085]"
+                  >
+                    <td className="px-4 sm:px-6 py-4 text-sm text-[#0B0B0B] font-medium">
+                      {applicant.name}
+                    </td>
+                    <td className="px-4 sm:px-6 py-4 text-sm text-[#484849]">
+                      {applicant.location}
+                    </td>
+                    <td className="px-4 sm:px-6 py-4 text-sm text-[#484849]">
+                      {applicant.phone}
+                    </td>
+                    <td className="px-4 sm:px-6 py-4 text-sm text-[#484849]">
+                      {applicant.appliedDate}
+                    </td>
+                    <td className="px-4 sm:px-6 py-4 text-sm">
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(
+                          applicant.status
+                        )}`}
+                      >
+                        {applicant.status}
+                      </span>
+                    </td>
+                    <td className="px-4 sm:px-6 py-4 text-sm text-[#484849]">
+                      {applicant.email}
+                    </td>
+                    <td className="px-4 sm:px-6 py-4 text-center">
+                      <div className="flex items-center justify-center gap-3">
+                        {/* Eye Icon */}
+                        <button
+                          onClick={() => handleViewApplicantDetails(applicant)}
+                          className="p-2 text-[#484849] hover:text-[#0B0B0B] transition-colors cursor-pointer"
+                          title="View details"
+                        >
+                          <Eye size={18} />
+                        </button>
+
+                        {/* Dropdown toggle */}
+                        <button
+                          onClick={(e) => handleDropdownToggle(e, applicant.id)}
+                          className="p-2 text-[#484849] hover:text-[#0B0B0B] transition-colors cursor-pointer"
+                          title="Change status"
+                        >
+                          <ChevronDown
+                            size={18}
+                            className={`transition-transform duration-200 ${
+                              openDropdownId === applicant.id ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </>
+      )}
 
       {/* Dropdown Menu */}
       {openDropdownId !== null && (
