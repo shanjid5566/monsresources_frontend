@@ -146,6 +146,7 @@ const router = createBrowserRouter(
       >
         <Route path={'/hr/dashboard'} element={<HRDashboardOverview />} />
         <Route path={'/hr/jobs-listing'} element={<HRJobPosting />} />
+        <Route path={'/hr/jobs/add'} element={<AddJobListing />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />
