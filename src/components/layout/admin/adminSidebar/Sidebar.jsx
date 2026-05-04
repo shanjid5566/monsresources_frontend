@@ -10,7 +10,7 @@ const MENU_ITEMS = {
     { icon: Briefcase, label: 'Job Listing', href: '/admin/jobs' },
     { icon: Users, label: 'User Management', href: '/admin/users' },
     { icon: Layers, label: 'Category', href: '/admin/categories' },
-    { icon: Settings, label: 'Settings', href: '/admin/settings' },
+    { icon: Settings, label: 'Settings', href: '/admin/account' },
   ],
   hr: [
     { icon: LayoutDashboard, label: 'Dashboard Overview', href: '/hr/dashboard' },
@@ -21,7 +21,7 @@ const MENU_ITEMS = {
     { icon: Briefcase, label: 'Job Listing', href: '/user/jobs-listing' },
     { icon: ClipboardCheck , label: 'Applied Job', href: '/user/applications' },
     { icon: Bookmark , label: 'Saved Job', href: '/user/saved' },
-    { icon: Settings, label: 'Account', href: '/user/settings' },
+    { icon: Settings, label: 'Account', href: '/user/account' },
   ],
 };
 
@@ -84,7 +84,7 @@ const Sidebar = ({ onClose = () => {} }) => {
       <div className="p-4 border-t border-gray-300">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 w-full px-4 py-2.5 rounded-lg text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors"
+          className="flex items-center gap-3 w-full px-4 py-2.5 rounded-lg text-gray-700  hover:text-red-600 transition-colors cursor-pointer"
         >
           <LogOut size={20} />
           <span className="text-sm font-medium">Logout</span>
