@@ -9,16 +9,16 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const ApplicationTrends = ({ data, selectedYear, onYearChange }) => {
+const ApplicationTrends = ({ data, selectedYear, onYearChange, heading = 'Application Trends', subheading = 'Monthly breakdown of views and applications' }) => {
   return (
     <div className="bg-[#FDF9EE] rounded-lg p-6 border border-[#E8E3D6]">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
         <div>
           <h2 className="text-2xl font-bold text-[#1A1B1C] mb-1">
-            Application Trends
+            {heading}
           </h2>
           <p className="text-[#222424] text-sm">
-            Monthly breakdown of views and applications
+            {subheading}
           </p>
         </div>
 
