@@ -14,6 +14,7 @@ import Home from '../pages/public/home/Home';
 import FindJobs from '../pages/public/find_jobs/FindJobs';
 import JobDetails from '../components/common/JobDetails';
 import ResetPassword from '../pages/authentication/ResetPassword';
+import HrAccount from '../pages/hr/account/HrAccount';
 
 const ROUTES = {
   HOME: '/',
@@ -41,7 +42,7 @@ const UserJobListing = lazy(() => import('../pages/user/job_listing/JobListing')
 const ApplicantDetails = lazy(() => import('../pages/public/ApplicantDetails'));
 const AppliedJob = lazy(() => import('../pages/user/applied_job/AppliedJob'));
 const SavedJob = lazy(() => import('../pages/user/saved_job/SavedJob'));
-const Account = lazy(() => import('../pages/user/account/Account'));
+const Account = lazy(() => import('../pages/user/account/UserAccount'));
 const HRDashboardOverview = lazy(() => import('../pages/hr/dashboard/DashboardOverview'));
 const HRJobPosting = lazy(() => import('../pages/hr/job_posting/JobPosting'));
 
@@ -147,6 +148,7 @@ const router = createBrowserRouter(
         <Route path={'/hr/dashboard'} element={<HRDashboardOverview />} />
         <Route path={'/hr/jobs-listing'} element={<HRJobPosting />} />
         <Route path={'/hr/jobs/add'} element={<AddJobListing />} />
+        <Route path={'/hr/account'} element={<HrAccount />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />

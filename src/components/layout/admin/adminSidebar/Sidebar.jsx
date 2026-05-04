@@ -14,7 +14,7 @@ const MENU_ITEMS = {
   hr: [
     { icon: LayoutDashboard, label: 'Dashboard Overview', href: '/hr/dashboard' },
     { icon: Briefcase, label: 'Job Postings', href: '/hr/jobs-listing' },
-    { icon: Settings, label: 'Settings', href: '/hr/settings' },
+    { icon: Settings, label: 'Settings', href: '/hr/account' },
   ],
   user: [
     { icon: Briefcase, label: 'Job Listing', href: '/user/jobs-listing' },
