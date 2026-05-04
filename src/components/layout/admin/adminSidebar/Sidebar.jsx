@@ -12,10 +12,9 @@ const MENU_ITEMS = {
     { icon: Settings, label: 'Settings', href: '/admin/settings' },
   ],
   hr: [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
-    { icon: Briefcase, label: 'Job Postings', href: '/admin/jobs' },
-    { icon: Users, label: 'Applicants', href: '/admin/applicants' },
-    { icon: Settings, label: 'Settings', href: '/admin/settings' },
+    { icon: LayoutDashboard, label: 'Dashboard Overview', href: '/hr/dashboard' },
+    { icon: Briefcase, label: 'Job Postings', href: '/hr/jobs' },
+    { icon: Settings, label: 'Settings', href: '/hr/settings' },
   ],
   user: [
     { icon: Briefcase, label: 'Job Listing', href: '/user/jobs-listing' },

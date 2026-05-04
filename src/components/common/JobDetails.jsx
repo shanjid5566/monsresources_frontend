@@ -18,11 +18,10 @@ import {
   Globe,
   Cpu,
   Building2,
-  Eye,
-  ChevronDown,
 } from "lucide-react";
 import { getJobById } from "../../data/jobsData";
 import ApplyModal from "./ApplyModal";
+import ApplicantsList from "./ApplicantsList";
 
 // Icon renderer helper
 const getIcon = (iconName) => {
@@ -46,31 +45,10 @@ const JobDetails = () => {
   const location = useLocation();
   const user = useSelector((state) => state.auth.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [openDropdownId, setOpenDropdownId] = useState(null);
-  const [applicantStates, setApplicantStates] = useState({});
-
-  // Fixed position dropdown state
-  const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 });
 
   const isFromDashboard = location.state?.fromDashboard === true;
   const isFromAppliedJobs = location.state?.fromAppliedJobs === true;
   const shouldHideApplySection = isFromDashboard || isFromAppliedJobs;
-
-  // Handle click outside to close dropdown
-  useEffect(() => {
-    const handleClickOutside = () => {
-      setOpenDropdownId(null);
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  // Close dropdown on scroll (important since dropdown is fixed)
-  useEffect(() => {
-    const handleScroll = () => setOpenDropdownId(null);
-    window.addEventListener("scroll", handleScroll, true);
-    return () => window.removeEventListener("scroll", handleScroll, true);
-  }, []);
 
   // Sample applicant data
   const initialApplicants = [
@@ -84,55 +62,6 @@ const JobDetails = () => {
     { id: 8, name: "Courtney Henry", location: "Hybrid (UK)", phone: "(629) 555-0129", appliedDate: "8-9-2022", status: "Rejected", email: "willie.jennings@example.com" },
     { id: 9, name: "Eleanor Pena", location: "Portland, OR", phone: "(704) 555-0127", appliedDate: "9-4-2022", status: "Shortlist", email: "nathan.roberts@example.com" },
   ];
-
-  const applicants = initialApplicants.map(app => ({
-    ...app,
-    status: applicantStates[app.id]?.status || app.status
-  }));
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "Shortlist": return "bg-[#063D2E] text-white";
-      case "Rejected": return "bg-[#B70000] text-white";
-      case "Schedule": return "bg-[#002065] text-white";
-      default: return "bg-gray-200 text-gray-700";
-    }
-  };
-
-  const handleStatusChange = (applicantId, newStatus) => {
-    setApplicantStates(prev => ({
-      ...prev,
-      [applicantId]: { status: newStatus }
-    }));
-    setOpenDropdownId(null);
-  };
-
-  const handleViewApplicantDetails = (applicant) => {
-    navigate(`/applicant/${applicant.id}`);
-  };
-
-  // Key fix: use position:fixed so overflow-x-auto cannot clip the dropdown.
-  // getBoundingClientRect() gives viewport-relative coordinates — perfect for fixed positioning.
-  const handleDropdownToggle = (e, applicantId) => {
-    e.stopPropagation();
-
-    if (openDropdownId === applicantId) {
-      setOpenDropdownId(null);
-      return;
-    }
-
-    const rect = e.currentTarget.getBoundingClientRect();
-    const dropdownHeight = 160;
-    const spaceBelow = window.innerHeight - rect.bottom;
-    const dropUp = spaceBelow < dropdownHeight;
-
-    setDropdownPos({
-      top: dropUp ? rect.top - dropdownHeight : rect.bottom + 4,
-      right: window.innerWidth - rect.right,
-    });
-
-    setOpenDropdownId(applicantId);
-  };
 
   const job = getJobById(id);
 
@@ -293,103 +222,7 @@ const JobDetails = () => {
       />
 
       {/* Applicant List Section - Only visible if coming from Dashboard and jobs-listing page */}
-      {isFromDashboard && (
-        <div className="mt-12 mb-12">
-          <div className="container mx-auto px-4 sm:px-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0B0B0B] mb-6">Applicant list</h2>
-
-            <div className="overflow-x-auto rounded-lg shadow">
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-[#D3C085]">
-                    <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">Name</th>
-                    <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">Location</th>
-                    <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">Phone Number</th>
-                    <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">Applied Date</th>
-                    <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">Status</th>
-                    <th className="px-4 sm:px-6 py-3 text-left text-sm font-semibold text-[#0B0B0B]">Email</th>
-                    <th className="px-4 sm:px-6 py-3 text-center text-sm font-semibold text-[#0B0B0B]">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {applicants.map((applicant) => (
-                    <tr key={applicant.id} className="bg-[#E6E1D6] border-b border-[#D3C085]">
-                      <td className="px-4 sm:px-6 py-4 text-sm text-[#0B0B0B] font-medium">{applicant.name}</td>
-                      <td className="px-4 sm:px-6 py-4 text-sm text-[#484849]">{applicant.location}</td>
-                      <td className="px-4 sm:px-6 py-4 text-sm text-[#484849]">{applicant.phone}</td>
-                      <td className="px-4 sm:px-6 py-4 text-sm text-[#484849]">{applicant.appliedDate}</td>
-                      <td className="px-4 sm:px-6 py-4 text-sm">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(applicant.status)}`}>
-                          {applicant.status}
-                        </span>
-                      </td>
-                      <td className="px-4 sm:px-6 py-4 text-sm text-[#484849]">{applicant.email}</td>
-                      <td className="px-4 sm:px-6 py-4 text-center">
-                        <div className="flex items-center justify-center gap-3">
-                          {/* Eye Icon */}
-                          <button
-                            onClick={() => handleViewApplicantDetails(applicant)}
-                            className="p-2 text-[#484849] hover:text-[#0B0B0B] transition-colors cursor-pointer"
-                            title="View details"
-                          >
-                            <Eye size={18} />
-                          </button>
-
-                          {/* Dropdown toggle — no wrapper div needed anymore */}
-                          <button
-                            onClick={(e) => handleDropdownToggle(e, applicant.id)}
-                            className="p-2 text-[#484849] hover:text-[#0B0B0B] transition-colors cursor-pointer"
-                            title="Change status"
-                          >
-                            <ChevronDown
-                              size={18}
-                              className={`transition-transform duration-200 ${openDropdownId === applicant.id ? "rotate-180" : ""}`}
-                            />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/*
-        Dropdown rendered here — completely OUTSIDE the table and overflow-x-auto container.
-        Uses position:fixed with coordinates from getBoundingClientRect() so it can never
-        be clipped, and automatically opens upward when near the bottom of the viewport.
-        Only visible if coming from Dashboard and jobs-listing page
-      */}
-      {isFromDashboard && openDropdownId !== null && (
-        <div
-          onMouseDown={(e) => e.stopPropagation()}
-          style={{
-            position: "fixed",
-            top: dropdownPos.top,
-            right: dropdownPos.right,
-            zIndex: 9999,
-          }}
-          className="w-44 bg-white border border-[#D3C085] rounded-lg shadow-xl"
-        >
-          {["Shortlist", "Rejected", "Schedule"].map((status, index) => (
-            <button
-              key={status}
-              onClick={() => handleStatusChange(openDropdownId, status)}
-              className={`w-full px-4 py-3 text-sm font-semibold text-[#0B0B0B] hover:bg-[#F5F2E8] transition-colors
-                ${index !== 2 ? "border-b border-[#E6E1D6]" : ""}
-                ${index === 0 ? "rounded-t-lg" : ""}
-                ${index === 2 ? "rounded-b-lg" : ""}
-                ${applicants.find((a) => a.id === openDropdownId)?.status === status ? "bg-[#EBE5D9]" : ""}
-              `}
-            >
-              {status}
-            </button>
-          ))}
-        </div>
-      )}
+      {isFromDashboard && <ApplicantsList applicants={initialApplicants} heading="Applicant list" />}
     </div>
   );
 };
