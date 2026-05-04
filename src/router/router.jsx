@@ -12,7 +12,7 @@ import AdminLayout from '../components/layout/admin/Layout';
 import { selectIsAuthenticated } from '../store/slices/authSlice';
 import Home from '../pages/public/home/Home';
 import FindJobs from '../pages/public/find_jobs/FindJobs';
-import JobDetails from '../components/common/JobDetails';
+import JobDetails from '../components/common/jobs/JobDetails';
 import ResetPassword from '../pages/authentication/ResetPassword';
 import HrAccount from '../pages/hr/account/HrAccount';
 
@@ -37,7 +37,7 @@ const ForgotPassword = lazy(() => import('../pages/authentication/ForgotPassword
 const Otp = lazy(() => import('../pages/authentication/Otp'));
 const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
 const JobListing = lazy(() => import('../pages/admin/job_listing/JobListing'));
-const AddJobListing = lazy(() => import('../components/common/AddJobListing'));
+const AddJobListing = lazy(() => import('../components/common/jobs/AddJobListing'));
 const UserJobListing = lazy(() => import('../pages/user/job_listing/JobListing'));
 const ApplicantDetails = lazy(() => import('../pages/public/ApplicantDetails'));
 const AppliedJob = lazy(() => import('../pages/user/applied_job/AppliedJob'));

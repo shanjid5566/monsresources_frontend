@@ -1,5 +1,5 @@
 import React from 'react'
-import Account from '../../../components/common/Account'
+import Account from '../../../components/common/account/Account'
 
 const HrAccount = () => {
   return (

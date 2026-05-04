@@ -19,7 +19,7 @@ import {
   Cpu,
   Building2,
 } from "lucide-react";
-import { getJobById } from "../../data/jobsData";
+import { getJobById } from "../../../data/jobsData";
 import ApplyModal from "./ApplyModal";
 import ApplicantsList from "./ApplicantsList";
 

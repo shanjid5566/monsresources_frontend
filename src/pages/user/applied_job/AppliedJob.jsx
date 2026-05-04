@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import JobsGrid from "../../../components/common/JobsGrid";
+import JobsGrid from "../../../components/common/jobs/JobsGrid";
 import { getAllJobs } from '../../../data/jobsData';
 
 const AppliedJob = () => {

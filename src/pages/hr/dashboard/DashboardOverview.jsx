@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Briefcase, Users, UserCheck } from "lucide-react";
 import StatusCard from "./components/StatusCard";
 import ApplicationTrends from "./components/ApplicationTrends";
-import ApplicantsList from "../../../components/common/ApplicantsList";
+import ApplicantsList from "../../../components/common/jobs/ApplicantsList";
 
 const DashboardOverview = () => {
   const [selectedYear, setSelectedYear] = useState("thisYear");

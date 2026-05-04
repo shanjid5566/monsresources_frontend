@@ -1,5 +1,5 @@
 import React from 'react'
-import JobsGrid from '../../../../../components/common/JobsGrid'
+import JobsGrid from '../../../../../components/common/jobs/JobsGrid'
 import { getFeaturedJobs } from '../../../../../data/jobsData'
 
 const FeaturedJobs = () => {

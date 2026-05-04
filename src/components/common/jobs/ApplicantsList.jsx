@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, ChevronDown } from "lucide-react";
-import Pagination from "./Pagination";
+import Pagination from "../pagination/Pagination";
 
 const ApplicantsList = ({ applicants: initialApplicants = [], heading = "Applicant list", itemsPerPage = 10, useContainer = true }) => {
   const navigate = useNavigate();

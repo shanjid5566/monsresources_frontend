@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import JobsGrid from '../../../components/common/JobsGrid';
+import JobsGrid from '../../../components/common/jobs/JobsGrid';
 import { getAllJobs } from '../../../data/jobsData';
 
 const JobPosting = () => {

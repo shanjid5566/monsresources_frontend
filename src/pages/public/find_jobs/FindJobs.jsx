@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react'
 import FindJobsBanner from './components/FindJobsBanner'
 import JobsFilterBar from './components/JobsFilterBar'
-import JobsGrid from '../../../components/common/JobsGrid'
-import Pagination from '../../../components/common/Pagination'
-import CTABanner from '../../../components/common/CTABanner'
+import JobsGrid from '../../../components/common/jobs/JobsGrid'
+import Pagination from '../../../components/common/pagination/Pagination'
+import CTABanner from '../../../components/common/banner/CTABanner'
 
 const FindJobs = () => {
 	const [currentPage, setCurrentPage] = useState(1)
