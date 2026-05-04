@@ -1,14 +1,35 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUser, selectIsAuthenticated, logout } from '../../store/slices/authSlice';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const handleEmployerRegister = () => {
     navigate('/register', { state: { isEmployerRegister: true } });
     setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+    setIsMenuOpen(false);
+  };
+
+  const getDashboardLink = () => {
+    if (!user) return '/';
+    const roleMap = {
+      user: '/user/jobs-listing',
+      hr: '/admin/dashboard',
+      admin: '/admin/dashboard',
+    };
+    return roleMap[user.role] || '/';
   };
 
   return (
@@ -23,21 +44,48 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <div className='hidden lg:flex items-center gap-6'>
-              <Link to='/find-jobs' className='text-base font-medium text-[#0C0C0C] cursor-pointer mr-12'>
-                Find Jobs
-              </Link>
-              <button
-                onClick={handleEmployerRegister}
-                className='px-4 py-2 rounded-lg text-base font-semibold bg-[#1A5F37] text-white cursor-pointer hover:bg-[#155630] transition-colors'
-              >
-                Get Employers Account
-              </button>
-              <Link
-                to={'/login'}
-                className='px-4 py-2 rounded-lg text-base font-semibold bg-[#D4AF37] text-[#0C0C0C] cursor-pointer hover:bg-[#c4a02e] transition-colors'
-              >
-                Sign In
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  {user?.role === 'user' && (
+                    <Link 
+                      to='/find-jobs' 
+                      className='text-base font-medium text-[#0C0C0C] cursor-pointer mr-12'
+                    >
+                      Find Jobs
+                    </Link>
+                  )}
+                  <Link
+                    to={getDashboardLink()}
+                    className='px-4 py-2 rounded-lg text-base font-semibold bg-[#1A5F37] text-white cursor-pointer hover:bg-[#155630] transition-colors'
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className='px-4 py-2 rounded-lg text-base font-semibold bg-[#D4AF37] text-[#0C0C0C] cursor-pointer hover:bg-[#c4a02e] transition-colors'
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to='/find-jobs' className='text-base font-medium text-[#0C0C0C] cursor-pointer mr-12'>
+                    Find Jobs
+                  </Link>
+                  <button
+                    onClick={handleEmployerRegister}
+                    className='px-4 py-2 rounded-lg text-base font-semibold bg-[#1A5F37] text-white cursor-pointer hover:bg-[#155630] transition-colors'
+                  >
+                    Get Employers Account
+                  </button>
+                  <Link
+                    to={'/login'}
+                    className='px-4 py-2 rounded-lg text-base font-semibold bg-[#D4AF37] text-[#0C0C0C] cursor-pointer hover:bg-[#c4a02e] transition-colors'
+                  >
+                    Sign In
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -64,26 +112,55 @@ const Header = () => {
           {/* Mobile Menu */}
           <div className='fixed top-16 left-0 right-0 bg-white z-40 lg:hidden animate-slide-down shadow-lg'>
             <div className='p-4 space-y-3'>
-              <a 
-                href='#' 
-                onClick={() => setIsMenuOpen(false)} 
-                className='block w-full px-4 py-2 rounded-lg text-sm font-semibold text-[#0C0C0C] border-2 border-[#0C0C0C] text-center cursor-pointer'
-              >
-                Find Jobs
-              </a>
-              <button
-                onClick={handleEmployerRegister}
-                className='w-full px-4 py-2 rounded-lg text-sm font-semibold bg-[#1A5F37] text-white cursor-pointer hover:bg-[#155630] transition-colors'
-              >
-                Get Employers Account
-              </button>
-              <Link
-                to={'/login'}
-                onClick={() => setIsMenuOpen(false)}
-                className='w-full block px-4 py-2 rounded-lg text-sm font-semibold bg-[#D4AF37] text-[#0C0C0C] text-center cursor-pointer'
-              >
-                Sign In
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  {user?.role === 'user' && (
+                    <Link 
+                      to='/find-jobs'
+                      onClick={() => setIsMenuOpen(false)}
+                      className='block w-full px-4 py-2 rounded-lg text-sm font-semibold text-[#0C0C0C] border-2 border-[#0C0C0C] text-center cursor-pointer'
+                    >
+                      Find Jobs
+                    </Link>
+                  )}
+                  <Link
+                    to={getDashboardLink()}
+                    onClick={() => setIsMenuOpen(false)}
+                    className='w-full px-4 py-2 rounded-lg text-sm font-semibold bg-[#1A5F37] text-white cursor-pointer hover:bg-[#155630] transition-colors block text-center'
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className='w-full px-4 py-2 rounded-lg text-sm font-semibold bg-[#D4AF37] text-[#0C0C0C] cursor-pointer hover:bg-[#c4a02e] transition-colors'
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <a 
+                    href='#' 
+                    onClick={() => setIsMenuOpen(false)} 
+                    className='block w-full px-4 py-2 rounded-lg text-sm font-semibold text-[#0C0C0C] border-2 border-[#0C0C0C] text-center cursor-pointer'
+                  >
+                    Find Jobs
+                  </a>
+                  <button
+                    onClick={handleEmployerRegister}
+                    className='w-full px-4 py-2 rounded-lg text-sm font-semibold bg-[#1A5F37] text-white cursor-pointer hover:bg-[#155630] transition-colors'
+                  >
+                    Get Employers Account
+                  </button>
+                  <Link
+                    to={'/login'}
+                    onClick={() => setIsMenuOpen(false)}
+                    className='w-full block px-4 py-2 rounded-lg text-sm font-semibold bg-[#D4AF37] text-[#0C0C0C] text-center cursor-pointer'
+                  >
+                    Sign In
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </>

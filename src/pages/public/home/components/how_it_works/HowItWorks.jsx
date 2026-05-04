@@ -1,26 +1,29 @@
-import React from 'react'
+import React from "react";
 
 const HowItWorks = () => {
   const steps = [
     {
       id: 1,
       title: "Create an account!",
-      description: "Take a moment to create your profile in just 30 seconds, share what you're looking for, and then you can begin swiping at your own pace",
-      image: "/home/how_it_works_1.png"
+      description:
+        "Take a moment to create your profile in just 30 seconds, share what you're looking for, and then you can begin swiping at your own pace",
+      image: "/home/how_it_works_1.png",
     },
     {
       id: 2,
       title: "Upload Job Post",
-      description: "Sharing job opportunity with us is essential for connecting with exceptional candidates, highlight the unique aspects of your role, the skills you seek",
-      image: "/home/how_it_works_2.png"
+      description:
+        "Sharing job opportunity with us is essential for connecting with exceptional candidates, highlight the unique aspects of your role, the skills you seek",
+      image: "/home/how_it_works_2.png",
     },
     {
       id: 3,
       title: "Get Employees",
-      description: "Congratulations, we have successfully found your dream employee, they meet the criteria and are definitely professional",
-      image: "/home/how_it_works_3.png"
-    }
-  ]
+      description:
+        "Congratulations, we have successfully found your dream employee, they meet the criteria and are definitely professional",
+      image: "/home/how_it_works_3.png",
+    },
+  ];
 
   return (
     <section className="w-full bg-[#F2EFE9] py-16 lg:py-24">
@@ -31,7 +34,8 @@ const HowItWorks = () => {
             How it works
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#111111] leading-tight max-w-2xl">
-            How can we connect entre reneurs job seekers in a chill way?
+            Decreasing the time it takes for PNW companies to find, vet and hire
+            thew key people
           </h2>
         </div>
 
@@ -79,7 +83,7 @@ const HowItWorks = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default HowItWorks
+export default HowItWorks;
