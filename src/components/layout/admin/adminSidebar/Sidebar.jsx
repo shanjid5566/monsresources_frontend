@@ -7,8 +7,8 @@ import { logout } from '../../../../store/slices/authSlice';
 const MENU_ITEMS = {
   admin: [
     { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
-    { icon: Briefcase, label: 'Job Postings', href: '/admin/jobs' },
-    { icon: Users, label: 'Users & Applicants', href: '/admin/users' },
+    { icon: Briefcase, label: 'Job Listing', href: '/admin/jobs' },
+    { icon: Users, label: 'User Management', href: '/admin/users' },
     { icon: Settings, label: 'Settings', href: '/admin/settings' },
   ],
   hr: [
