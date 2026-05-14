@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_webpack_tailwind_app=self.webpackChunkreact_webpack_tailwind_app||[]).push([[497],{6497(e,a,p){p.r(a),p.d(a,{default:()=>r}),p(6540);var t=p(7726),c=p(4848);const r=function(){return(0,c.jsx)(t.A,{userType:"user"})}}}]);
