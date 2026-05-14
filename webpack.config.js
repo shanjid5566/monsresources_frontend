@@ -17,12 +17,14 @@ module.exports = (env, argv) => {
       ? dotenv.parse(fs.readFileSync(fallbackPath))
       : {};
 
-  // Stringify each var so DefinePlugin can do a literal text replacement
-  const envKeys = Object.keys(rawEnv).reduce((acc, key) => {
-    acc[`process.env.${key}`] = JSON.stringify(rawEnv[key]);
-    return acc;
-  }, {});
-  envKeys['process.env.NODE_ENV'] = JSON.stringify(argv.mode || 'development');
+  // Replace process.env as a whole object so any process.env.* reference is
+  // covered — prevents "process is not defined" in the browser bundle.
+  const envKeys = {
+    'process.env': JSON.stringify({
+      NODE_ENV: argv.mode || 'development',
+      ...rawEnv,
+    }),
+  };
 
   const devPort = parseInt(rawEnv.REACT_APP_DEV_PORT || '5173', 10);
 
